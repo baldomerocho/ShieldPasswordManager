@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "137900084172",
+    "project_id": "shieldpass-b7700",
+    "storage_bucket": "shieldpass-b7700.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:137900084172:android:29dcda491debd503816b69",
+        "android_client_info": {
+          "package_name": "cho.baldomero.ptf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "137900084172-5qnk1f2sb9p4uoq54nbujeib9b0d4nh4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cho.baldomero.ptf",
+            "certificate_hash": "7c80cb5ae30ac96e584e54f804d11297686a80e8"
+          }
+        },
+        {
+          "client_id": "137900084172-osgbjeom991fktl4f436aiakhd8ob705.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDou0UdLD-domFDkGtX6JC-0CefRzr0m_k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "137900084172-osgbjeom991fktl4f436aiakhd8ob705.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "137900084172-ea43ls8gbl7348l8ua2t9jp1blfen38q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "cho.baldomero.ptf"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
