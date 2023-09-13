@@ -12,7 +12,7 @@ class LoaderPage extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Lottie.asset('assets/lotties/animation_lmh4iopi.json'),
-          Text(message, style: Theme.of(context).textTheme.headline6),
+          Text(message, style: Theme.of(context).textTheme.titleLarge),
         ],
       )),
     );

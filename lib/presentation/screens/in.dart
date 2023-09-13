@@ -15,9 +15,9 @@ class InSession extends StatelessWidget {
         return state.when(
             initial: () {
               context.read<SessionBloc>().add(const SessionEvent.loggedIn());
-              return LoaderPage("Authenticating...");
+              return const LoaderPage("Authenticating...");
             },
-            loading: () => LoaderPage("Checking session..."),
+            loading: () => const LoaderPage("Checking session..."),
             success: () => const HomePage(),
             failure: (e) => LoginPage(e));
       },

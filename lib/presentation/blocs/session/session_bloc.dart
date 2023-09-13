@@ -1,19 +1,28 @@
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:ptf/domain/repositories/authentication_repository.dart';
 
 part 'session_event.dart';
 part 'session_state.dart';
 part 'session_bloc.freezed.dart';
 
 class SessionBloc extends Bloc<SessionEvent, SessionState> {
-  SessionBloc() : super(const SessionState.initial()) {
+  bool credential = false;
+  final AuthenticationRepository repository;
+  SessionBloc({required this.repository}) : super(const SessionState.initial()) {
     on<_LoggedIn>((event, emit) async {
-      await Future.delayed(const Duration(seconds: 1));
       emit(const SessionState.loading());
-      await Future.delayed(const Duration(seconds: 3));
-      emit(const SessionState.success());
-      await Future.delayed(const Duration(seconds: 10));
-      emit(const SessionState.failure("Session expired"));
+      try {
+        credential = await repository.hasSession();
+        if (credential) {
+          emit(const SessionState.success());
+        } else {
+          emit(const SessionState.failure("unauthenticated"));
+        }
+      } on Exception catch (e) {
+        emit(SessionState.failure("failure:$e"));
+      }
     });
   }
 }
