@@ -283,7 +283,8 @@ mixin _$SessionState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function() authenticated,
+    required TResult Function() unauthenticated,
     required TResult Function(String message) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -291,7 +292,8 @@ mixin _$SessionState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function()? authenticated,
+    TResult? Function()? unauthenticated,
     TResult? Function(String message)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -299,7 +301,8 @@ mixin _$SessionState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function()? authenticated,
+    TResult Function()? unauthenticated,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) =>
@@ -308,7 +311,8 @@ mixin _$SessionState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
+    required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Failure value) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -316,7 +320,8 @@ mixin _$SessionState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
+    TResult? Function(_Authenticated value)? authenticated,
+    TResult? Function(_Unauthenticated value)? unauthenticated,
     TResult? Function(_Failure value)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -324,7 +329,8 @@ mixin _$SessionState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
+    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) =>
@@ -388,7 +394,8 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function() authenticated,
+    required TResult Function() unauthenticated,
     required TResult Function(String message) failure,
   }) {
     return initial();
@@ -399,7 +406,8 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function()? authenticated,
+    TResult? Function()? unauthenticated,
     TResult? Function(String message)? failure,
   }) {
     return initial?.call();
@@ -410,7 +418,8 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function()? authenticated,
+    TResult Function()? unauthenticated,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -425,7 +434,8 @@ class _$_Initial implements _Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
+    required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Failure value) failure,
   }) {
     return initial(this);
@@ -436,7 +446,8 @@ class _$_Initial implements _Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
+    TResult? Function(_Authenticated value)? authenticated,
+    TResult? Function(_Unauthenticated value)? unauthenticated,
     TResult? Function(_Failure value)? failure,
   }) {
     return initial?.call(this);
@@ -447,7 +458,8 @@ class _$_Initial implements _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
+    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
@@ -501,7 +513,8 @@ class _$_Loading implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function() authenticated,
+    required TResult Function() unauthenticated,
     required TResult Function(String message) failure,
   }) {
     return loading();
@@ -512,7 +525,8 @@ class _$_Loading implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function()? authenticated,
+    TResult? Function()? unauthenticated,
     TResult? Function(String message)? failure,
   }) {
     return loading?.call();
@@ -523,7 +537,8 @@ class _$_Loading implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function()? authenticated,
+    TResult Function()? unauthenticated,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -538,7 +553,8 @@ class _$_Loading implements _Loading {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
+    required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Failure value) failure,
   }) {
     return loading(this);
@@ -549,7 +565,8 @@ class _$_Loading implements _Loading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
+    TResult? Function(_Authenticated value)? authenticated,
+    TResult? Function(_Unauthenticated value)? unauthenticated,
     TResult? Function(_Failure value)? failure,
   }) {
     return loading?.call(this);
@@ -560,7 +577,8 @@ class _$_Loading implements _Loading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
+    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
@@ -576,34 +594,35 @@ abstract class _Loading implements SessionState {
 }
 
 /// @nodoc
-abstract class _$$_SuccessCopyWith<$Res> {
-  factory _$$_SuccessCopyWith(
-          _$_Success value, $Res Function(_$_Success) then) =
-      __$$_SuccessCopyWithImpl<$Res>;
+abstract class _$$_AuthenticatedCopyWith<$Res> {
+  factory _$$_AuthenticatedCopyWith(
+          _$_Authenticated value, $Res Function(_$_Authenticated) then) =
+      __$$_AuthenticatedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_SuccessCopyWithImpl<$Res>
-    extends _$SessionStateCopyWithImpl<$Res, _$_Success>
-    implements _$$_SuccessCopyWith<$Res> {
-  __$$_SuccessCopyWithImpl(_$_Success _value, $Res Function(_$_Success) _then)
+class __$$_AuthenticatedCopyWithImpl<$Res>
+    extends _$SessionStateCopyWithImpl<$Res, _$_Authenticated>
+    implements _$$_AuthenticatedCopyWith<$Res> {
+  __$$_AuthenticatedCopyWithImpl(
+      _$_Authenticated _value, $Res Function(_$_Authenticated) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Success implements _Success {
-  const _$_Success();
+class _$_Authenticated implements _Authenticated {
+  const _$_Authenticated();
 
   @override
   String toString() {
-    return 'SessionState.success()';
+    return 'SessionState.authenticated()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Success);
+        (other.runtimeType == runtimeType && other is _$_Authenticated);
   }
 
   @override
@@ -614,10 +633,11 @@ class _$_Success implements _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function() authenticated,
+    required TResult Function() unauthenticated,
     required TResult Function(String message) failure,
   }) {
-    return success();
+    return authenticated();
   }
 
   @override
@@ -625,10 +645,11 @@ class _$_Success implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function()? authenticated,
+    TResult? Function()? unauthenticated,
     TResult? Function(String message)? failure,
   }) {
-    return success?.call();
+    return authenticated?.call();
   }
 
   @override
@@ -636,12 +657,13 @@ class _$_Success implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function()? authenticated,
+    TResult Function()? unauthenticated,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
-    if (success != null) {
-      return success();
+    if (authenticated != null) {
+      return authenticated();
     }
     return orElse();
   }
@@ -651,10 +673,11 @@ class _$_Success implements _Success {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
+    required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Failure value) failure,
   }) {
-    return success(this);
+    return authenticated(this);
   }
 
   @override
@@ -662,10 +685,11 @@ class _$_Success implements _Success {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
+    TResult? Function(_Authenticated value)? authenticated,
+    TResult? Function(_Unauthenticated value)? unauthenticated,
     TResult? Function(_Failure value)? failure,
   }) {
-    return success?.call(this);
+    return authenticated?.call(this);
   }
 
   @override
@@ -673,19 +697,140 @@ class _$_Success implements _Success {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
+    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
-    if (success != null) {
-      return success(this);
+    if (authenticated != null) {
+      return authenticated(this);
     }
     return orElse();
   }
 }
 
-abstract class _Success implements SessionState {
-  const factory _Success() = _$_Success;
+abstract class _Authenticated implements SessionState {
+  const factory _Authenticated() = _$_Authenticated;
+}
+
+/// @nodoc
+abstract class _$$_UnauthenticatedCopyWith<$Res> {
+  factory _$$_UnauthenticatedCopyWith(
+          _$_Unauthenticated value, $Res Function(_$_Unauthenticated) then) =
+      __$$_UnauthenticatedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_UnauthenticatedCopyWithImpl<$Res>
+    extends _$SessionStateCopyWithImpl<$Res, _$_Unauthenticated>
+    implements _$$_UnauthenticatedCopyWith<$Res> {
+  __$$_UnauthenticatedCopyWithImpl(
+      _$_Unauthenticated _value, $Res Function(_$_Unauthenticated) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Unauthenticated implements _Unauthenticated {
+  const _$_Unauthenticated();
+
+  @override
+  String toString() {
+    return 'SessionState.unauthenticated()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Unauthenticated);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() authenticated,
+    required TResult Function() unauthenticated,
+    required TResult Function(String message) failure,
+  }) {
+    return unauthenticated();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? authenticated,
+    TResult? Function()? unauthenticated,
+    TResult? Function(String message)? failure,
+  }) {
+    return unauthenticated?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? authenticated,
+    TResult Function()? unauthenticated,
+    TResult Function(String message)? failure,
+    required TResult orElse(),
+  }) {
+    if (unauthenticated != null) {
+      return unauthenticated();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_Failure value) failure,
+  }) {
+    return unauthenticated(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Authenticated value)? authenticated,
+    TResult? Function(_Unauthenticated value)? unauthenticated,
+    TResult? Function(_Failure value)? failure,
+  }) {
+    return unauthenticated?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_Failure value)? failure,
+    required TResult orElse(),
+  }) {
+    if (unauthenticated != null) {
+      return unauthenticated(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Unauthenticated implements SessionState {
+  const factory _Unauthenticated() = _$_Unauthenticated;
 }
 
 /// @nodoc
@@ -753,7 +898,8 @@ class _$_Failure implements _Failure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function() authenticated,
+    required TResult Function() unauthenticated,
     required TResult Function(String message) failure,
   }) {
     return failure(message);
@@ -764,7 +910,8 @@ class _$_Failure implements _Failure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function()? authenticated,
+    TResult? Function()? unauthenticated,
     TResult? Function(String message)? failure,
   }) {
     return failure?.call(message);
@@ -775,7 +922,8 @@ class _$_Failure implements _Failure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function()? authenticated,
+    TResult Function()? unauthenticated,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -790,7 +938,8 @@ class _$_Failure implements _Failure {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
+    required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Failure value) failure,
   }) {
     return failure(this);
@@ -801,7 +950,8 @@ class _$_Failure implements _Failure {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
+    TResult? Function(_Authenticated value)? authenticated,
+    TResult? Function(_Unauthenticated value)? unauthenticated,
     TResult? Function(_Failure value)? failure,
   }) {
     return failure?.call(this);
@@ -812,7 +962,8 @@ class _$_Failure implements _Failure {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
+    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {

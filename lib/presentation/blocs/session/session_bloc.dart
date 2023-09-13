@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ptf/domain/repositories/authentication_repository.dart';
 
@@ -16,9 +15,9 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
       try {
         credential = await repository.hasSession();
         if (credential) {
-          emit(const SessionState.success());
+          emit(const SessionState.authenticated());
         } else {
-          emit(const SessionState.failure("unauthenticated"));
+          emit(const SessionState.unauthenticated());
         }
       } on Exception catch (e) {
         emit(SessionState.failure("failure:$e"));

@@ -18,7 +18,8 @@ class InSession extends StatelessWidget {
               return const LoaderPage("Authenticating...");
             },
             loading: () => const LoaderPage("Checking session..."),
-            success: () => const HomePage(),
+            authenticated: () => const HomePage(),
+            unauthenticated: () => const LoginPage(""),
             failure: (e) => LoginPage(e));
       },
     );

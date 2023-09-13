@@ -6,16 +6,13 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository{
   FirebaseAuthentication firebaseAuthentication;
   AuthenticationRepositoryImpl(this.firebaseAuthentication);
   @override
-  Future<UserCredential> signInWithGoogle() => firebaseAuthentication.signInWithGoogle();
+  Future<UserCredential?> signInWithGoogle() => firebaseAuthentication.signInWithGoogle();
 
   @override
-  Future<UserCredential> signInWithApple() => firebaseAuthentication.signInWithApple();
+  Future<UserCredential?> signInWithApple() => firebaseAuthentication.signInWithApple();
 
   @override
-  Future<UserCredential> signInWithEmail({required String email, required String password}) {
-    // TODO: implement signInWithEmail
-    throw UnimplementedError();
-  }
+  Future<UserCredential?> signInWithEmail({required String email, required String password})  => firebaseAuthentication.signInWithEmail(email,password);
 
   @override
   Future<void> signOut() => firebaseAuthentication.signOut();
@@ -24,10 +21,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository{
   Future<void> delete() => firebaseAuthentication.deleteUser();
 
   @override
-  Future<UserCredential> signInWithTwitter() {
-    // TODO: implement signInWithTwitter
-    throw UnimplementedError();
-  }
+  Future<UserCredential?> signInWithTwitter() => firebaseAuthentication.signInWithTwitter();
 
   @override
   Future<bool> hasSession() => firebaseAuthentication.hasSession();

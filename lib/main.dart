@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ptf/domain/repositories/authentication_repository.dart';
 import 'package:ptf/infrastructure/datasources/firebase_authentication.dart';
 import 'package:ptf/infrastructure/repositories/authentication_repository_impl.dart';
-import 'package:ptf/presentation/blocs/session/session_bloc.dart';
 
 import 'firebase_options.dart';
+import 'presentation/blocs/blocs.dart';
 import 'presentation/screens/in.dart';
 
 void main() async {
@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => SessionBloc(repository: authenticationRepository)),
+        BlocProvider(create: (_) => AuthenticationBloc(repository: authenticationRepository)),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

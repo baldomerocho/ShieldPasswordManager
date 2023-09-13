@@ -7,13 +7,19 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ptf/domain/repositories/authentication_repository.dart';
 
 import 'package:ptf/main.dart';
 
+import 'mock1.dart';
+
 void main() {
+
+
+  final AuthenticationRepository authenticationRepository = AuthenticationRepositoryMock();
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(MyApp(authenticationRepository: authenticationRepository,));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
@@ -28,3 +34,4 @@ void main() {
     expect(find.text('1'), findsOneWidget);
   });
 }
+
