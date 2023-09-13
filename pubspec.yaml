@@ -31,6 +31,33 @@ dev_dependencies:
   freezed: ^2.4.2
   json_serializable: ^6.7.1
   build_runner: ^2.4.6
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.3.2
+
+flutter_native_splash:
+  image: assets/images/shield.png
+  color: "#ffffff"
+  android_disable_fullscreen: true
+
+flutter_launcher_icons:
+  android: "ic_launcher"
+  ios: true
+  image_path: "assets/images/shield_bg_white.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  remove_alpha_ios: true
+  adaptive_icon_background: "#ffffff"
+  web:
+    generate: true
+    image_path: "assets/images/shield.png"
+    background_color: "#ffffff"
+    theme_color: "#ffffff"
+  windows:
+    generate: true
+    image_path: "assets/images/shield_bg_white.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "assets/images/shield_bg_white.png"
 
 flutter:
   generate: true
