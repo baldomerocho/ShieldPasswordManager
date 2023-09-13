@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ptf/domain/repositories/authentication_repository.dart';
 import 'package:ptf/infrastructure/datasources/firebase_authentication.dart';
 import 'package:ptf/infrastructure/repositories/authentication_repository_impl.dart';
+import 'package:ptf/routes.dart';
 
 import 'firebase_options.dart';
 import 'presentation/blocs/blocs.dart';
@@ -16,6 +18,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final FirebaseAuthentication firebaseAuthentication = FirebaseAuthentication();
   // repositories
   final AuthenticationRepository authenticationRepository = AuthenticationRepositoryImpl(firebaseAuthentication);
@@ -35,13 +38,15 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => AuthenticationBloc(repository: authenticationRepository)),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'SHIELD PASS',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.pink),
           useMaterial3: true,
           fontFamily: "DM Sans",
         ),
-        home: const InSession()
+        home: const InSession(),
+        initialRoute: "/",
+        routes: RoutesApp.way,
       ),
     );
   }

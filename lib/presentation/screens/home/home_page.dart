@@ -5,6 +5,7 @@ import 'package:ptf/presentation/blocs/blocs.dart';
 part 'actions/logout_widget.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
+  static const routeName = "/home";
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +18,10 @@ class HomePage extends StatelessWidget {
       ),
       body: const Center(
         child: Text('Home Page'),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.of(context).pushNamed('/password_editor', arguments: [true, []]),
+        child: const Icon(Icons.add),
       )
     );
   }

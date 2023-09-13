@@ -7,6 +7,7 @@ import 'package:ptf/presentation/widgets/loader_page.dart';
 
 class InSession extends StatelessWidget {
   const InSession({super.key});
+  static const routeName = "/";
 
   @override
   Widget build(BuildContext context) {
