@@ -10,6 +10,7 @@ class InputField extends StatelessWidget {
   final bool? obscureText;
   final bool? autofocus;
 
+
   InputField({
     this.controller,
     this.label,
@@ -30,7 +31,6 @@ class InputField extends StatelessWidget {
         TextFormField(
           autofocus: true,
           controller: controller,
-          obscureText: true,
           decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
@@ -75,7 +75,17 @@ class InputField extends StatelessWidget {
 class InputDropdown extends StatelessWidget {
   final List<dynamic> items;
   final String? label;
-  const InputDropdown({super.key,required this.items, this.label});
+  final String? validatorMessage;
+  // on change
+  final ValueChanged<String> onChanged;
+
+  const InputDropdown({
+    super.key,
+    required this.items,
+    this.label,
+    required this.onChanged,
+    this.validatorMessage,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +100,7 @@ class InputDropdown extends StatelessWidget {
               value: e)
             ).toList(),
             onChanged: (value){
-              print(value);
+              onChanged(value.toString());
             },
           decoration: InputDecoration(
             isDense: true,
@@ -110,6 +120,11 @@ class InputDropdown extends StatelessWidget {
               ),
             ),
           ),
+          validator: (value) {
+            if (value == null || value == "") {
+              return validatorMessage;
+            }
+          },
         ),
         SizedBox(height: 20)
       ],
