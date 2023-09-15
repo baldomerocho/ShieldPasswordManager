@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ptf/domain/entities/entities.dart';
+import 'package:ptf/local.dart';
 import 'package:ptf/presentation/blocs/blocs.dart';
 import 'package:ptf/presentation/blocs/data/set_pass_favourite/set_pass_favourite_bloc.dart';
 import 'package:ptf/presentation/widgets/editor/password.dart';
@@ -13,6 +14,7 @@ class PasswordItemButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final labels = AppLocalizations.of(context)!;
     return CupertinoListTile(
       onTap: () {
         context.read<SetViewedBloc>().add(SetViewedEvent.send(pass.id));
@@ -29,29 +31,29 @@ class PasswordItemButton extends StatelessWidget {
         context.read<SetPassFavouriteBloc>().add(SetPassFavouriteEvent.setPassFavourite(passId: pass.id, value: !pass.favorite));
       }),
       trailing: IconButton(onPressed: (){
-                _deleteConfirmation(context, pass.id);
-              }, icon: Icon(CupertinoIcons.delete, color: Colors.pink.shade200)),
+                _deleteConfirmation(context, pass.id, labels);
+              }, icon: Icon(CupertinoIcons.delete_solid, color: Colors.pink.shade200)),
     );
   }
 
-  _deleteConfirmation(BuildContext context, String id) {
+  _deleteConfirmation(BuildContext context, String id, AppLocalizations labels) {
     return showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text("Delete Password"),
-          content: Text("Are you sure you want to delete this password?"),
+          title: Text(labels.deletePassword),
+          content: Text(labels.deletePasswordMessage),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text("Cancel"),
+              child: Text(labels.cancel),
             ),
             TextButton(
               onPressed: () {
                 context.read<DeletePassBloc>().add(DeletePassEvent.send(id: id));
                 Navigator.of(context).pop();
               },
-              child: Text("Delete"),
+              child: Text(labels.delete),
             ),
           ],
         );

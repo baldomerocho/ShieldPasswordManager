@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
+import 'package:ptf/local.dart';
 import 'package:ptf/presentation/blocs/blocs.dart';
 
 class PersistentHeaderEditor extends SliverPersistentHeaderDelegate {
@@ -12,6 +13,7 @@ class PersistentHeaderEditor extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    final labels = AppLocalizations.of(context)!;
     return Stack(
       children: [
         Container(
@@ -66,7 +68,7 @@ class PersistentHeaderEditor extends SliverPersistentHeaderDelegate {
         Positioned(child: SafeArea(
           child: Align(
             alignment: Alignment.topCenter,
-            child:Text(status ? "Create" : "Edit", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)
+            child:Text(status ? labels.create : labels.update, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)
           )
         ))
       ],

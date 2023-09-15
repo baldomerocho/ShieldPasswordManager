@@ -1,8 +1,10 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ptf/application/models/buttons.dart';
+import 'package:ptf/local.dart';
 import 'package:ptf/presentation/blocs/authentication/authentication_provider.dart';
 import 'package:ptf/presentation/blocs/blocs.dart';
 import 'package:ptf/presentation/screens/authentication/login_form_widget.dart';
@@ -52,6 +54,7 @@ class LoginPage extends StatelessWidget {
   }
 
   Widget _buildLoginOptions(List<LoginOption> options, BuildContext context) {
+    final labels = AppLocalizations.of(context)!;
     return Scaffold(
         body: CustomScrollView(
           slivers: [
@@ -59,7 +62,7 @@ class LoginPage extends StatelessWidget {
               backgroundColor: Colors.transparent,
               elevation: 0,
               toolbarHeight: 100,
-              title: Text("Login", style: Theme.of(context).textTheme.titleLarge),
+              title: Text("Shield Password Manager", style: Theme.of(context).textTheme.titleLarge),
               centerTitle: true,
             ),
             SliverToBoxAdapter(
@@ -71,23 +74,38 @@ class LoginPage extends StatelessWidget {
                         child: Image.asset('assets/images/shield.png', height: 100,)
                     ),
                     const SizedBox(height: 50,),
-                    ...options.map((e) => ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              side: BorderSide(color: Colors.pink.shade100, width: 1)
-                          ),
-                        ),
-                        onPressed: e.onPressed, child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(e.icon, height: 25,),
-                        const VerticalDivider(),
-                        Text("Sign In With ${e.name}", style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.w600
-                        ))],
-                    ))).toList()
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: CupertinoListSection.insetGrouped(
+                        backgroundColor: Colors.grey.shade200,
+                        header: Text(labels.login, style: Theme.of(context).textTheme.titleLarge),
+                        children: [
+                          ...options.map((e) => CupertinoListTile(
+                              onTap: e.onPressed,
+                              title:Text(labels.signInWith(e.name)),
+                              leading: Image.asset(e.icon, height: 20,),
+                          )).toList(),
+                        ],
+                        footer: Text("Version 0.0.1", style: TextStyle(color: CupertinoColors.inactiveGray),),
+                      ),
+                    )
+                    // ...options.map((e) => ElevatedButton(
+                    //     style: ElevatedButton.styleFrom(
+                    //       elevation: 0,
+                    //       shape: RoundedRectangleBorder(
+                    //           borderRadius: BorderRadius.circular(10),
+                    //           side: BorderSide(color: Colors.pink.shade100, width: 1)
+                    //       ),
+                    //     ),
+                    //     onPressed: e.onPressed, child: Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     Image.asset(e.icon, height: 25,),
+                    //     const VerticalDivider(),
+                    //     Text(labels.signInWith(e.name), style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    //         fontWeight: FontWeight.w600
+                    //     ))],
+                    // ))).toList()
                   ],
                 ),
               ),

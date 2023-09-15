@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ptf/local.dart';
 import 'package:ptf/presentation/blocs/blocs.dart';
 import 'package:ptf/presentation/screens/passwords/categories_slider.dart';
 
@@ -12,6 +13,7 @@ class PersistentHeaderPasswords extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    final labels = AppLocalizations.of(context)!;
     return Stack(
       children: [
         Container(
@@ -63,7 +65,7 @@ class PersistentHeaderPasswords extends SliverPersistentHeaderDelegate {
                               // white
                               borderSide: BorderSide(color: Colors.white, width: 2.0),
                             ),
-                            hintText: "Search",
+                            hintText: labels.search,
                             contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                             hintStyle: TextStyle(color: Colors.pink.shade800),
                             focusColor: Colors.pink.shade800,
@@ -77,7 +79,7 @@ class PersistentHeaderPasswords extends SliverPersistentHeaderDelegate {
                           ),
                           validator: (value) {
                               if(value!.isEmpty) {
-                                return "Please enter a password";
+                                return labels.passwordRequired;
                               }
                               return null;
                           },

@@ -65,6 +65,7 @@ flutter_launcher_icons:
     image_path: "assets/images/shield_bg_white.png"
 
 flutter:
+  generate: true
   uses-material-design: true
 
   assets:
@@ -120,3 +121,5 @@ flutter:
         - asset: "fonts/DM_Sans/static/DMSans-BlackItalic.ttf"
           weight: 900
           style: italic
+flutter_intl:
+  enabled: true

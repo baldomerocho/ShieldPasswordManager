@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:ptf/domain/entities/password_entity.dart';
+import 'package:ptf/local.dart';
 import 'package:ptf/presentation/blocs/blocs.dart';
 import 'package:ptf/presentation/widgets/password_item_button/password_item_button.dart';
 
@@ -16,6 +17,7 @@ class PasswordsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController _searchController = TextEditingController();
     GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final labels = AppLocalizations.of(context)!;
     return Scaffold(
         body: CustomScrollView(
           slivers: [
@@ -45,7 +47,7 @@ class PasswordsPage extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                     Lottie.asset("assets/lotties/animation_lmk2dmhq.json"),
-                                      Text('No passwords yet')
+                                      Text(labels.noPasswordsYet)
                                       ],
                                     ),
                                   )
@@ -53,7 +55,7 @@ class PasswordsPage extends StatelessWidget {
                               }
                               return SliverFillRemaining(
                                   child: CupertinoListSection.insetGrouped(
-                                    header: Text("Passwords", style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                                    header: Text(labels.passwords, style: Theme.of(context).textTheme.titleLarge!.copyWith(
                                         fontWeight: FontWeight.bold
                                     )),
                                     children: data.map((e) => PasswordItemButton(pass: e)).toList(),

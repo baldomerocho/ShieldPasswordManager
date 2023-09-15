@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ptf/domain/entities/entities.dart';
+import 'package:ptf/local.dart';
 import 'package:ptf/presentation/blocs/blocs.dart';
 import 'package:ptf/presentation/widgets/favourites_card/favourites_card.dart';
 import 'package:ptf/presentation/widgets/last_created/last_created_widget.dart';
@@ -26,11 +27,8 @@ class HomePage extends StatelessWidget {
         children: [
           FavouritesCard(),
           SizedBox(height: 20),
-
           LastViewedWidget(),
-
           SizedBox(height: 20),
-
           LastCreatedWidget(),
           SizedBox(height: 20),
           LatestUpdatedWidget(),

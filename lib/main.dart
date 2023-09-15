@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ptf/domain/repositories/authentication_repository.dart';
 import 'package:ptf/domain/repositories/data_repository.dart';
 import 'package:ptf/infrastructure/datasources/firebase_authentication.dart';
@@ -12,6 +13,7 @@ import 'package:ptf/presentation/blocs/data/set_pass_favourite/set_pass_favourit
 import 'package:ptf/routes.dart';
 
 import 'firebase_options.dart';
+import 'local.dart';
 import 'presentation/blocs/blocs.dart';
 import 'presentation/screens/in.dart';
 
@@ -79,6 +81,15 @@ class MyApp extends StatelessWidget {
         home: const InSession(),
         initialRoute: "/",
         routes: RoutesApp.way,
+        localizationsDelegates: [
+          AppLocalizations.delegate, // Add this line
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          Locale('es'), // Spanish
+        ],
       ),
     );
   }

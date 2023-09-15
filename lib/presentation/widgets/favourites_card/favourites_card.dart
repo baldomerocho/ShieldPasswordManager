@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ptf/local.dart';
 import 'package:ptf/presentation/widgets/get_all_passwords.dart';
 
 class FavouritesCard extends StatelessWidget {
@@ -6,12 +7,12 @@ class FavouritesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final labels = AppLocalizations.of(context)!;
     return GestureDetector(
       onTap: () => Navigator.of(context).pushNamed('/favourites'),
       child: Card(
         clipBehavior: Clip.antiAlias,
-        elevation: 10,
-        shadowColor: Colors.black.withOpacity(0.4),
+        elevation: 0,
         child: Stack(
           children: [
             Column(
@@ -34,10 +35,10 @@ class FavouritesCard extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Expanded(child: Text("You selection of favoutites. View them here.")),
+                      Expanded(child: Text(labels.favouritesCard, style: TextStyle(color: Colors.deepOrange.shade900))),
                       ElevatedButton(onPressed: (){
                         Navigator.pushNamed(context, "/favourites");
-                      }, child: Text("Get All Favs")),
+                      }, child: Text(labels.viewFavourites))
                     ],
                   ),
                 )
@@ -60,7 +61,7 @@ class FavouritesCard extends StatelessWidget {
             Positioned(
               top: 20,
               left: 20,
-              child: Text("My favs", style: Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.white, fontWeight: FontWeight.w900)),)
+              child: Text(labels.myFavourites, style: Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.white, fontWeight: FontWeight.w900)),)
           ],
         ),
       ),

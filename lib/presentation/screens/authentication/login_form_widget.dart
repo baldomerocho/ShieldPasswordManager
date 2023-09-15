@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ptf/local.dart';
 import 'package:ptf/presentation/blocs/authentication/authentication_bloc.dart';
 import 'package:ptf/presentation/blocs/authentication/authentication_provider.dart';
 
@@ -8,6 +9,7 @@ class LoginFormWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final labels = AppLocalizations.of(context)!;
     final TextEditingController _emailController = TextEditingController();
     final TextEditingController _passwordController = TextEditingController();
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -28,12 +30,12 @@ class LoginFormWidget extends StatelessWidget {
             TextFormField(
               controller: _emailController,
               decoration: InputDecoration(
-                labelText: 'Email',
+                labelText: labels.email,
               ),
               // TODO: regex email validation
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter your email';
+                  return labels.emailRequired;
                 }
                 return null;
               },
@@ -41,12 +43,12 @@ class LoginFormWidget extends StatelessWidget {
             TextFormField(
               controller: _passwordController,
               decoration: InputDecoration(
-                labelText: 'Password',
+                labelText: labels.password,
               ),
               // TODO: show/hide password
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter your password';
+                  return labels.passwordRequired;
                 }
                 return null;
               },
@@ -58,7 +60,7 @@ class LoginFormWidget extends StatelessWidget {
                     orElse: () => Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            TextButton(onPressed: (){Navigator.pop(context);}, child: Text("Cancel")),
+                            TextButton(onPressed: (){Navigator.pop(context);}, child: Text(labels.cancel)),
                             ElevatedButton(
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
@@ -66,7 +68,7 @@ class LoginFormWidget extends StatelessWidget {
                                   context.read<AuthenticationBloc>().add(AuthenticationEvent.newLoginEvent(AuthenticationProvider.email, credentials: user));
                                 }
                             },
-                              child: Text('Login'),
+                              child: Text(labels.login),
                             ),
                           ],
                         ));

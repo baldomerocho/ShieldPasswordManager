@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ptf/local.dart';
 
 class GetAllPasswordsButton extends StatelessWidget {
   final String message;
@@ -7,6 +8,7 @@ class GetAllPasswordsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final labels = AppLocalizations.of(context)!;
     return Row(
       children: [
         Expanded(
@@ -18,7 +20,7 @@ class GetAllPasswordsButton extends StatelessWidget {
               )
             )
         ),
-        ElevatedButton(child: Text(label??"Get All"), onPressed: (){
+        ElevatedButton(child: Text(label??labels.getAll), onPressed: (){
           Navigator.pushNamed(context, "/passwords");
         }),
       ],

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ptf/application/models/password_model.dart';
 import 'package:ptf/domain/entities/password_entity.dart';
+import 'package:ptf/local.dart';
 import 'package:ptf/presentation/blocs/blocs.dart';
 import 'package:ptf/presentation/widgets/input_field.dart';
 
@@ -79,6 +80,7 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
 
   @override
   Widget build(BuildContext context) {
+    final labels = AppLocalizations.of(context)!;
     return Scaffold(
       body: Form(
         key: _formKey,
@@ -95,7 +97,7 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
                 child: Container(
                   margin: EdgeInsets.only(top: 16),
                   child: Text(
-                    "Credential",
+                    labels.credential,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -108,38 +110,38 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
             SliverList(delegate: SliverChildListDelegate([
               InputDropdown(
                 initialValue: _categoryID,
-                validatorMessage: "required",
-                label: "Categoríes",
+                validatorMessage: labels.categoriesRequired,
+                label: labels.categories,
                 onChanged: (value) {
                   _categoryID = value;
                 },
               ),
               InputField(controller: _websiteController,
-                label: "Site Address",
+                label: labels.siteAddress,
                 icon: Icons.cloud,
                 iconColor: Colors.pink,
-                validatorMessage: "required",),
+                validatorMessage: labels.siteAddressRequired,),
               InputField(controller: _usernameController,
-                  label: "User Name",
+                  label: labels.username,
                   icon: Icons.person,
                   iconColor: Colors.pink,
-                  validatorMessage: "required"),
+                  validatorMessage: labels.usernameRequired),
               InputField(controller: _passwordController,
-                  label: "Password",
+                  label: labels.password,
                   icon: Icons.lock,
                   iconColor: Colors.pink,
-                  validatorMessage: "required"),
+                  validatorMessage: labels.passwordRequired),
             ]))
             ),
             SliverToBoxAdapter(child: SizedBox(height: 500))
           ],
         ),
       ),
-      bottomSheet: isCreate ? _createButton(context, _formKey) : _updateButton(context,  _formKey)
+      bottomSheet: isCreate ? _createButton(context, _formKey,labels) : _updateButton(context,  _formKey,labels)
     );
   }
 
-  Widget _createButton(BuildContext context, _formKey) {
+  Widget _createButton(BuildContext context, _formKey, labels) {
     return BlocConsumer<SavePassBloc, SavePassState>(
       listener: (context, state) {
         state.maybeMap(
@@ -153,10 +155,8 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
             },
             error: (_){
               Navigator.of(context).pop();
-              print("error");
             },
             loading: (_) {
-              print("loading");
               showDialog(
                 context: context,
                 builder: (context) {
@@ -165,7 +165,7 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
                       children: [
                         CircularProgressIndicator(),
                         SizedBox(width: 16),
-                        Text("Saving..."),
+                        Text(labels.saving),
                       ],
                     ),
                   );
@@ -208,7 +208,7 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
                     print("error ${_formKey.currentState!.validate()}}");
                   }
                 },
-                child: Text("Save"),
+                child: Text(labels.save),
               ),
             ),
           ),
@@ -217,7 +217,7 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
     );
   }
 
-  Widget _updateButton(BuildContext context, _formKey) {
+  Widget _updateButton(BuildContext context, _formKey, labels) {
     return BlocConsumer<UpdatePassBloc, UpdatePassState>(
       listener: (context, state) {
         state.maybeMap(
@@ -241,7 +241,7 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
                       children: [
                         CircularProgressIndicator(),
                         SizedBox(width: 16),
-                        Text("Saving..."),
+                        Text(labels.saving),
                       ],
                     ),
                   );
@@ -279,7 +279,7 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
                         .add(UpdatePassEvent.send(password: password, id: passEditing.id));
                   }
                 },
-                child: Text("Update"),
+                child: Text(labels.update),
               ),
             ),
           ),

@@ -5,6 +5,7 @@ class LogOutWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final labels = AppLocalizations.of(context)!;
     var bloc = context.read<AuthenticationBloc>();
     return BlocConsumer<AuthenticationBloc, AuthenticationState>(
       listener: (context, state) {
@@ -17,19 +18,19 @@ class LogOutWidget extends StatelessWidget {
       builder: (context, state) => IconButton(
           onPressed: () =>
             showDialog(context: context, builder: (_) => AlertDialog(
-              title: const Text("Logout"),
-              content: const Text("Are you sure you want to logout?"),
+              title: Text(labels.logout),
+              content: Text(labels.logoutMessage),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(context),
-                  child: const Text("Cancel"),
+                  child: Text(labels.cancel),
                 ),
                 TextButton(
                   onPressed: () {
                     bloc.add(const AuthenticationEvent.newLogoutEvent());
                     Navigator.pop(context);
                   },
-                  child: const Text("Logout"),
+                  child: Text(labels.logout)
                 )
               ],
             )),
