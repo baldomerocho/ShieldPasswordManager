@@ -15,15 +15,15 @@ class PasswordsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _searchController = TextEditingController();
-    GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final TextEditingController searchController = TextEditingController();
+    GlobalKey<FormState> formKey = GlobalKey<FormState>();
     final labels = AppLocalizations.of(context)!;
     return Scaffold(
         body: CustomScrollView(
           slivers: [
             SliverPersistentHeader(delegate: PersistentHeaderPasswords(
-              formKey: _formKey,
-              controller: _searchController,
+              formKey: formKey,
+              controller: searchController,
               height: 220
             ), pinned: true),
             BlocBuilder<WatchPasswordsBloc, WatchPasswordsState>(

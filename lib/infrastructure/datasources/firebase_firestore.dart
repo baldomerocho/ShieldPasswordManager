@@ -14,7 +14,7 @@ class Firestore{
   Stream<List<CategoryEntity>> watchCategories(){
     return database.collection("categories").snapshots().map((QuerySnapshot<Map<String, dynamic>> snapshot) {
       return snapshot.docs.map((doc) {
-        final data = doc.data() as Map<String, dynamic>;
+        final data = doc.data();
         data['id'] = doc.id;
         return CategoryEntity.fromJson(data);
       }).toList();
@@ -24,7 +24,7 @@ class Firestore{
   Stream<List<CategoryEntity>> watchCategoriesSlider(){
     return database.collection("categories").snapshots().map((QuerySnapshot<Map<String, dynamic>> snapshot) {
       return snapshot.docs.map((doc) {
-        final data = doc.data() as Map<String, dynamic>;
+        final data = doc.data();
         data['id'] = doc.id;
         return CategoryEntity.fromJson(data);
       }).toList();
@@ -67,7 +67,7 @@ class Firestore{
         .snapshots()
         .map((QuerySnapshot<Map<String, dynamic>> snapshot) {
       return snapshot.docs.map((doc) {
-        final data = doc.data() as Map<String, dynamic>;
+        final data = doc.data();
         data['id'] = doc.id;
         return PasswordEntity.fromJson(data);
       }).toList();
@@ -90,7 +90,7 @@ class Firestore{
         .snapshots()
         .map((QuerySnapshot<Map<String, dynamic>> snapshot) {
       return snapshot.docs.map((doc) {
-        final data = doc.data() as Map<String, dynamic>;
+        final data = doc.data();
         data['id'] = doc.id;
         return PasswordEntity.fromJson(data);
       }).toList();
@@ -105,7 +105,7 @@ class Firestore{
         .snapshots()
         .map((QuerySnapshot<Map<String, dynamic>> snapshot) {
       return snapshot.docs.map((doc) {
-        final data = doc.data() as Map<String, dynamic>;
+        final data = doc.data();
         data['id'] = doc.id;
         return PasswordEntity.fromJson(data);
       }).toList();
@@ -120,7 +120,7 @@ class Firestore{
         .snapshots()
         .map((QuerySnapshot<Map<String, dynamic>> snapshot) {
       return snapshot.docs.map((doc) {
-        final data = doc.data() as Map<String, dynamic>;
+        final data = doc.data();
         data['id'] = doc.id;
         return PasswordEntity.fromJson(data);
       }).toList();
@@ -136,7 +136,7 @@ class Firestore{
           .snapshots()
           .map((QuerySnapshot<Map<String, dynamic>> snapshot) {
         return snapshot.docs.map((doc) {
-          final data = doc.data() as Map<String, dynamic>;
+          final data = doc.data();
           data['id'] = doc.id;
           return PasswordEntity.fromJson(data);
         }).toList();
@@ -156,7 +156,7 @@ class Firestore{
         .snapshots()
         .map((QuerySnapshot<Map<String, dynamic>> snapshot) {
       return snapshot.docs.map((doc) {
-        final data = doc.data() as Map<String, dynamic>;
+        final data = doc.data();
         data['id'] = doc.id;
         return PasswordEntity.fromJson(data);
       }).toList();

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ptf/domain/entities/entities.dart';
 import 'package:ptf/local.dart';
 import 'package:ptf/presentation/blocs/blocs.dart';
 import 'package:ptf/presentation/widgets/favourites_card/favourites_card.dart';
@@ -24,7 +23,7 @@ class HomePage extends StatelessWidget {
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
-        children: [
+        children: const [
           FavouritesCard(),
           SizedBox(height: 20),
           LastViewedWidget(),

@@ -32,8 +32,8 @@ class LatestUpdatedWidget extends StatelessWidget {
                         header: Text(labels.latestUpdated, style: Theme.of(context).textTheme.titleLarge!.copyWith(
                             color: Colors.white, fontWeight: FontWeight.bold
                         )),
-                        children: data?.map((e) => PasswordItemButton(pass:e)).toList(),
-                        footer: GetAllPasswordsButton(message: labels.latestUpdatedCard)
+                        footer: GetAllPasswordsButton(message: labels.latestUpdatedCard),
+                        children: data?.map((e) => PasswordItemButton(pass:e)).toList()
                     );
                   }
               ));

@@ -23,7 +23,7 @@ class LastViewedWidget extends StatelessWidget {
               BlocProvider.of<TakeLastViewsBloc>(context).add(const TakeLastViewsEvent.watch());
               return Container();
             },
-            loading: () => CupertinoActivityIndicator(),
+            loading: () => const CupertinoActivityIndicator(),
             streamLoaded: (stream) => StreamBuilder<List<PasswordEntity>>(
               stream: stream,
               builder: (context, snapshot) {
@@ -32,8 +32,8 @@ class LastViewedWidget extends StatelessWidget {
                     header: Text(labels.latestViewed, style: Theme.of(context).textTheme.titleLarge!.copyWith(
                         color: Colors.white, fontWeight: FontWeight.bold
                     )),
-                    children: snapshot.data?.map((e) => PasswordItemButton(pass:e)).toList(),
-                    footer: GetAllPasswordsButton(message: labels.viewedCard)
+                    footer: GetAllPasswordsButton(message: labels.viewedCard),
+                    children: snapshot.data?.map((e) => PasswordItemButton(pass:e)).toList()
                 );
               }
             ),

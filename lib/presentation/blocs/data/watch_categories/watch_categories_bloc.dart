@@ -1,9 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ptf/domain/entities/category_entity.dart';
 import 'package:ptf/domain/repositories/data_repository.dart';
-import 'package:ptf/infrastructure/datasources/firebase_firestore.dart';
 
 part 'watch_categories_event.dart';
 part 'watch_categories_state.dart';

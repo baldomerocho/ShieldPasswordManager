@@ -20,14 +20,14 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var ctx = context.read<AuthenticationBloc>();
     List<LoginOption> options = [
-      LoginOption(name: "Email", icon: "assets/images/email.png" , onPressed: ()=> showGeneralDialog(context: context, pageBuilder: (ctx, anim1, anim2)=> Dialog(
+      LoginOption(name: "Email", icon: "assets/images/email.png" , onPressed: ()=> showGeneralDialog(context: context, pageBuilder: (ctx, anim1, anim2)=> const Dialog(
         child: LoginFormWidget()
       ),
         transitionBuilder: (ctx, anim1, anim2, child) => BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 4 * anim1.value, sigmaY: 4 * anim1.value),
           child: FadeTransition(
-            child: child,
             opacity: anim1,
+            child: child,
           ),
         ),
       )),
@@ -79,6 +79,7 @@ class LoginPage extends StatelessWidget {
                       child: CupertinoListSection.insetGrouped(
                         backgroundColor: Colors.grey.shade200,
                         header: Text(labels.login, style: Theme.of(context).textTheme.titleLarge),
+                        footer: const Text("Version 0.0.1", style: TextStyle(color: CupertinoColors.inactiveGray),),
                         children: [
                           ...options.map((e) => CupertinoListTile(
                               onTap: e.onPressed,
@@ -86,7 +87,6 @@ class LoginPage extends StatelessWidget {
                               leading: Image.asset(e.icon, height: 20,),
                           )).toList(),
                         ],
-                        footer: Text("Version 0.0.1", style: TextStyle(color: CupertinoColors.inactiveGray),),
                       ),
                     )
                     // ...options.map((e) => ElevatedButton(

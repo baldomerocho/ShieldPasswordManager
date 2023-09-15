@@ -22,12 +22,12 @@ class FavouritesPage extends StatelessWidget {
         body: BlocBuilder<WatchPassFavouritesBloc, WatchPassFavouritesState>(
           builder: (context, state) {
             return state.maybeWhen(
-              orElse: () => SizedBox.shrink(),
+              orElse: () => const SizedBox.shrink(),
               initial: () {
                 context.read<WatchPassFavouritesBloc>().add(WatchPassFavouritesEvent.watch());
-                return CircularProgressIndicator();
+                return const CircularProgressIndicator();
               },
-              loading: () => CircularProgressIndicator(),
+              loading: () => const CircularProgressIndicator(),
               streamLoaded: (stream) => StreamBuilder<List<PasswordEntity>>(
                 stream: stream,
                 builder: (context, snapshot){

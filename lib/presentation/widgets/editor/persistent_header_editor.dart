@@ -23,7 +23,7 @@ class PersistentHeaderEditor extends SliverPersistentHeaderDelegate {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              stops: [
+              stops: const [
                 0.1,
                 0.9,
               ],
@@ -68,7 +68,7 @@ class PersistentHeaderEditor extends SliverPersistentHeaderDelegate {
         Positioned(child: SafeArea(
           child: Align(
             alignment: Alignment.topCenter,
-            child:Text(status ? labels.create : labels.update, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)
+            child:Text(status ? labels.create : labels.update, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)
           )
         ))
       ],

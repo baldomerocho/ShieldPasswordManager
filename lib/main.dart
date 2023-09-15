@@ -81,13 +81,13 @@ class MyApp extends StatelessWidget {
         home: const InSession(),
         initialRoute: "/",
         routes: RoutesApp.way,
-        localizationsDelegates: [
+        localizationsDelegates: const [
           AppLocalizations.delegate, // Add this line
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: [
+        supportedLocales: const [
           Locale('es'), // Spanish
         ],
       ),

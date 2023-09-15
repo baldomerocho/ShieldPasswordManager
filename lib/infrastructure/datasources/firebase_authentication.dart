@@ -52,7 +52,6 @@ class FirebaseAuthentication {
 
   }
   Future<UserCredential> signInWithTwitter() async {
-    print("twitter");
     try{
       final twitterLogin = TwitterLogin(
           apiKey: '1xC4VzWB3asMsNRwnMGXXLAhj',
@@ -69,7 +68,6 @@ class FirebaseAuthentication {
       );
       return await FirebaseAuth.instance.signInWithCredential(twitterAuthCredential);
     } catch (error) {
-      print(error);
       throw Exception("Error during sign in with Twitter: $error");
     }
 

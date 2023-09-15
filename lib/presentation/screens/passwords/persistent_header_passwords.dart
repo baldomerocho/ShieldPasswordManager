@@ -23,7 +23,7 @@ class PersistentHeaderPasswords extends SliverPersistentHeaderDelegate {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              stops: [
+              stops: const [
                 0.1,
                 0.5,
                 0.9,
@@ -45,7 +45,7 @@ class PersistentHeaderPasswords extends SliverPersistentHeaderDelegate {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.958,
                   child: Row(
                     children: [
@@ -63,7 +63,7 @@ class PersistentHeaderPasswords extends SliverPersistentHeaderDelegate {
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               // white
-                              borderSide: BorderSide(color: Colors.white, width: 2.0),
+                              borderSide: const BorderSide(color: Colors.white, width: 2.0),
                             ),
                             hintText: labels.search,
                             contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -74,7 +74,7 @@ class PersistentHeaderPasswords extends SliverPersistentHeaderDelegate {
                                 controller.clear();
                                 context.read<WatchPasswordsBloc>().add(WatchPasswordsEvent.watchPasswords(""));
                               },
-                              icon: Icon(CupertinoIcons.clear, color: Colors.white),
+                              icon: const Icon(CupertinoIcons.clear, color: Colors.white),
                             ) : null,
                           ),
                           validator: (value) {
@@ -90,15 +90,15 @@ class PersistentHeaderPasswords extends SliverPersistentHeaderDelegate {
                             context.read<WatchPasswordsBloc>().add(WatchPasswordsEvent.watchPasswords(controller.text));
                           }
                         },
-                        icon: Icon(CupertinoIcons.search, color: Colors.white),
+                        icon: const Icon(CupertinoIcons.search, color: Colors.white),
                       ),
                     ],
                   ),
                 ),
                 Container(
                   height: kToolbarHeight/2,
-                  child: CategoriesSlider(),
                   margin: const EdgeInsets.only(top: 10),
+                  child: const CategoriesSlider(),
                 ),
               ],
             ),

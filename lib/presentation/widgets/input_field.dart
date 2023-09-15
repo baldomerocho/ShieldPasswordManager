@@ -1,6 +1,4 @@
-import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ptf/domain/entities/category_entity.dart';
@@ -17,7 +15,8 @@ class InputField extends StatelessWidget {
   final bool? autofocus;
 
 
-  InputField({
+  const InputField({
+    super.key,
     this.controller,
     this.label,
     this.hint,
@@ -33,7 +32,7 @@ class InputField extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("${label}", style: Theme.of(context).textTheme.titleMedium),
+        Text("$label", style: Theme.of(context).textTheme.titleMedium),
         TextFormField(
           autofocus: true,
           controller: controller,
@@ -62,7 +61,7 @@ class InputField extends StatelessWidget {
               ),
               hintText: hint,
               contentPadding: const EdgeInsets.all(10),
-              prefixIcon: icon != null ? Icon(icon) :Icon (Icons.text_fields),
+              prefixIcon: icon != null ? Icon(icon) :const Icon (Icons.text_fields),
             prefixIconColor: Colors.grey,
             ),
           validator: (value) {
@@ -72,7 +71,7 @@ class InputField extends StatelessWidget {
             return null;
           },
         ),
-        SizedBox(height: 20)
+        const SizedBox(height: 20)
       ],
     );
   }
@@ -98,11 +97,11 @@ class InputDropdown extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("${label}", style: Theme.of(context).textTheme.titleMedium),
+        Text("$label", style: Theme.of(context).textTheme.titleMedium),
         BlocBuilder<WatchCategoriesBloc, WatchCategoriesState>(
           builder: (context, state) {
             return state.maybeWhen(
-                orElse: () => CircularProgressIndicator(),
+                orElse: () => const CircularProgressIndicator(),
                 initial: () {
                   context.read<WatchCategoriesBloc>().add(const WatchCategoriesEvent.watch());
                   return const CircularProgressIndicator();
@@ -112,7 +111,6 @@ class InputDropdown extends StatelessWidget {
                     stream: stream,
                     builder: (context, snapshot) {
                       final categories = snapshot.data;
-                      print(categories);
                       return DropdownButtonFormField(
                             isDense: true,
                             value: initialValue == "" ? null : initialValue,
@@ -125,7 +123,7 @@ class InputDropdown extends StatelessWidget {
                             },
                           decoration: InputDecoration(
                             isDense: true,
-                            prefixIcon: Icon(Icons.list, color: Colors.grey),
+                            prefixIcon: const Icon(Icons.list, color: Colors.grey),
                             // if on focused pink icon else grey
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -154,7 +152,7 @@ class InputDropdown extends StatelessWidget {
                   );
                 });
           }),
-        SizedBox(height: 20)
+        const SizedBox(height: 20)
       ],
     );
   }

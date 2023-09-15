@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -22,11 +24,11 @@ class PasswordEditor extends StatefulWidget {
 }
 
 class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProviderStateMixin{
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _usernameController = TextEditingController();
-  TextEditingController _websiteController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _websiteController = TextEditingController();
   String _categoryID = "";
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   late AnimationController _animationController;
 
@@ -53,7 +55,7 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
 
     _animationController = AnimationController(
       vsync: this, // "this" se refiere a la instancia de _MyWidgetState
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
     );
 
     _animationController.addListener(() {
@@ -92,13 +94,13 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
               animationController:_animationController,
               ), floating: true, pinned: false,),
             SliverPadding(
-              padding: EdgeInsets.only(left: 16),
+              padding: const EdgeInsets.only(left: 16),
               sliver: SliverToBoxAdapter(
                 child: Container(
-                  margin: EdgeInsets.only(top: 16),
+                  margin: const EdgeInsets.only(top: 16),
                   child: Text(
                     labels.credential,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                     )
@@ -106,7 +108,7 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
                 ),
               ),
             ),
-            SliverPadding(padding: EdgeInsets.all(16), sliver:
+            SliverPadding(padding: const EdgeInsets.all(16), sliver:
             SliverList(delegate: SliverChildListDelegate([
               InputDropdown(
                 initialValue: _categoryID,
@@ -133,7 +135,7 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
                   validatorMessage: labels.passwordRequired),
             ]))
             ),
-            SliverToBoxAdapter(child: SizedBox(height: 500))
+            const SliverToBoxAdapter(child: SizedBox(height: 500))
           ],
         ),
       ),
@@ -141,7 +143,7 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
     );
   }
 
-  Widget _createButton(BuildContext context, _formKey, labels) {
+  Widget _createButton(BuildContext context, formKey, labels) {
     return BlocConsumer<SavePassBloc, SavePassState>(
       listener: (context, state) {
         state.maybeMap(
@@ -163,8 +165,8 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
                   return AlertDialog(
                     content: Row(
                       children: [
-                        CircularProgressIndicator(),
-                        SizedBox(width: 16),
+                        const CircularProgressIndicator(),
+                        const SizedBox(width: 16),
                         Text(labels.saving),
                       ],
                     ),
@@ -175,12 +177,12 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
         );
       },
       builder: (context, state) {
-        return Container(
+        return SizedBox(
           height: kToolbarHeight + (kToolbarHeight / 4),
           child: Align(
             alignment: Alignment.topCenter,
             child: Container(
-              margin: EdgeInsets.only(top: 10),
+              margin: const EdgeInsets.only(top: 10),
               width: MediaQuery
                   .of(context)
                   .size
@@ -199,13 +201,11 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
                     latestViewed: DateTime.now(),
                     safe: true,
                   );
-                  print(password);
-                  if (_formKey.currentState!.validate() &&
+                  if (formKey.currentState!.validate() &&
                       password.categoryId.isNotEmpty) {
                     context.read<SavePassBloc>()
                         .add(SavePassEvent.send(password: password));
                   } else {
-                    print("error ${_formKey.currentState!.validate()}}");
                   }
                 },
                 child: Text(labels.save),
@@ -217,7 +217,7 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
     );
   }
 
-  Widget _updateButton(BuildContext context, _formKey, labels) {
+  Widget _updateButton(BuildContext context, formKey, labels) {
     return BlocConsumer<UpdatePassBloc, UpdatePassState>(
       listener: (context, state) {
         state.maybeMap(
@@ -239,8 +239,8 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
                   return AlertDialog(
                     content: Row(
                       children: [
-                        CircularProgressIndicator(),
-                        SizedBox(width: 16),
+                        const CircularProgressIndicator(),
+                        const SizedBox(width: 16),
                         Text(labels.saving),
                       ],
                     ),
@@ -251,12 +251,12 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
         );
       },
       builder: (context, state) {
-        return Container(
+        return SizedBox(
           height: kToolbarHeight + (kToolbarHeight / 4),
           child: Align(
             alignment: Alignment.topCenter,
             child: Container(
-              margin: EdgeInsets.only(top: 10),
+              margin: const EdgeInsets.only(top: 10),
               width: MediaQuery.of(context).size.width * 0.9,
               child: CupertinoButton(
                 color: CupertinoColors.systemPink,
@@ -272,8 +272,7 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
                     latestViewed: DateTime.now(),
                     safe: passEditing.safe,
                   );
-                  print(password);
-                  if (_formKey.currentState!.validate() &&
+                  if (formKey.currentState!.validate() &&
                       password.categoryId.isNotEmpty) {
                     context.read<UpdatePassBloc>()
                         .add(UpdatePassEvent.send(password: password, id: passEditing.id));

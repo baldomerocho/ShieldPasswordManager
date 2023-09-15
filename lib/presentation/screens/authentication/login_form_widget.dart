@@ -10,9 +10,9 @@ class LoginFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context)!;
-    final TextEditingController _emailController = TextEditingController();
-    final TextEditingController _passwordController = TextEditingController();
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     return BlocListener<AuthenticationBloc, AuthenticationState>(
   listener: (context, state) {
     state.maybeMap(
@@ -23,12 +23,12 @@ class LoginFormWidget extends StatelessWidget {
   child: Container(
       padding: const EdgeInsets.all(16),
       child: Form(
-        key: _formKey,
+        key: formKey,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             TextFormField(
-              controller: _emailController,
+              controller: emailController,
               decoration: InputDecoration(
                 labelText: labels.email,
               ),
@@ -41,7 +41,7 @@ class LoginFormWidget extends StatelessWidget {
               },
             ),
             TextFormField(
-              controller: _passwordController,
+              controller: passwordController,
               decoration: InputDecoration(
                 labelText: labels.password,
               ),
@@ -63,8 +63,8 @@ class LoginFormWidget extends StatelessWidget {
                             TextButton(onPressed: (){Navigator.pop(context);}, child: Text(labels.cancel)),
                             ElevatedButton(
                               onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  EmailPassword user = EmailPassword(email: _emailController.text, password: _passwordController.text);
+                                if (formKey.currentState!.validate()) {
+                                  EmailPassword user = EmailPassword(email: emailController.text, password: passwordController.text);
                                   context.read<AuthenticationBloc>().add(AuthenticationEvent.newLoginEvent(AuthenticationProvider.email, credentials: user));
                                 }
                             },

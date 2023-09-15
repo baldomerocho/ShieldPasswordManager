@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ptf/local.dart';
-import 'package:ptf/presentation/widgets/get_all_passwords.dart';
 
 class FavouritesCard extends StatelessWidget {
   const FavouritesCard({super.key});
@@ -22,7 +21,7 @@ class FavouritesCard extends StatelessWidget {
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.amber.shade200,
-                    image: DecorationImage(
+                    image: const DecorationImage(
                       image: AssetImage('assets/images/star.jpeg'),
                       fit: BoxFit.cover
                     ),
