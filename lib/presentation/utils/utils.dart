@@ -1,1 +1,1 @@
-export 'notifications/sham_snackbar.dart';
+export 'notifications/noti_snackbar.dart';

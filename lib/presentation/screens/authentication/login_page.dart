@@ -6,7 +6,7 @@ import 'package:ptf/application/models/buttons.dart';
 import 'package:ptf/presentation/blocs/authentication/authentication_provider.dart';
 import 'package:ptf/presentation/blocs/blocs.dart';
 import 'package:ptf/presentation/screens/authentication/login_form_widget.dart';
-import 'package:ptf/presentation/utils/notifications/sham_snackbar.dart';
+import 'package:ptf/presentation/utils/utils.dart';
 
 import '../../widgets/loader_page.dart';
 

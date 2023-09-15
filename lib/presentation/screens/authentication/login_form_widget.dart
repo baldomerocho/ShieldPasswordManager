@@ -30,6 +30,7 @@ class LoginFormWidget extends StatelessWidget {
               decoration: InputDecoration(
                 labelText: 'Email',
               ),
+              // TODO: regex email validation
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your email';
@@ -42,6 +43,7 @@ class LoginFormWidget extends StatelessWidget {
               decoration: InputDecoration(
                 labelText: 'Password',
               ),
+              // TODO: show/hide password
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your password';
@@ -50,26 +52,26 @@ class LoginFormWidget extends StatelessWidget {
               },
             ),
             BlocBuilder<AuthenticationBloc, AuthenticationState>(
-  builder: (context, state) {
-    return state.maybeMap(
-        loading: (_) => const CircularProgressIndicator(),
-        orElse: ()=> Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(onPressed: (){Navigator.pop(context);}, child: Text("Cancel")),
-                ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      EmailPassword user = EmailPassword(email: _emailController.text, password: _passwordController.text);
-                      context.read<AuthenticationBloc>().add(AuthenticationEvent.newLoginEvent(AuthenticationProvider.email, credentials: user));
-                    }
-                },
-                  child: Text('Login'),
-                ),
-              ],
-            ));
-  },
-),
+              builder: (context, state) {
+                return state.maybeMap(
+                    loading: (_) => const CircularProgressIndicator(),
+                    orElse: () => Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(onPressed: (){Navigator.pop(context);}, child: Text("Cancel")),
+                            ElevatedButton(
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  EmailPassword user = EmailPassword(email: _emailController.text, password: _passwordController.text);
+                                  context.read<AuthenticationBloc>().add(AuthenticationEvent.newLoginEvent(AuthenticationProvider.email, credentials: user));
+                                }
+                            },
+                              child: Text('Login'),
+                            ),
+                          ],
+                        ));
+              },
+            ),
           ],
         ),
       ),
