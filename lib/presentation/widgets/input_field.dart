@@ -1,4 +1,10 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ptf/domain/entities/category_entity.dart';
+import 'package:ptf/presentation/blocs/blocs.dart';
 
 class InputField extends StatelessWidget {
   final TextEditingController? controller;
@@ -73,7 +79,7 @@ class InputField extends StatelessWidget {
 }
 
 class InputDropdown extends StatelessWidget {
-  final List<dynamic> items;
+  final String? initialValue;
   final String? label;
   final String? validatorMessage;
   // on change
@@ -81,7 +87,7 @@ class InputDropdown extends StatelessWidget {
 
   const InputDropdown({
     super.key,
-    required this.items,
+    this.initialValue,
     this.label,
     required this.onChanged,
     this.validatorMessage,
@@ -89,43 +95,63 @@ class InputDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<CategoryEntity> items = [];
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text("${label}", style: Theme.of(context).textTheme.titleMedium),
-        DropdownButtonFormField(
-            items: items.map((e) => DropdownMenuItem(
-              child: Text(e),
-              value: e)
-            ).toList(),
-            onChanged: (value){
-              onChanged(value.toString());
-            },
-          decoration: InputDecoration(
-            isDense: true,
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(
-                color: Colors.grey.shade400,
-                width: 2,
-              ),
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              // border grey
-              borderSide: BorderSide(
-                color: Colors.grey.shade200,
-                width: 2,
-              ),
-            ),
-          ),
-          validator: (value) {
-            if (value == null || value == "") {
-              return validatorMessage;
-            }
-          },
-        ),
+        BlocBuilder<WatchCategoriesBloc, WatchCategoriesState>(
+          builder: (context, state) {
+            return state.maybeWhen(
+                orElse: () => CircularProgressIndicator(),
+                initial: () {
+                  context.read<WatchCategoriesBloc>().add(const WatchCategoriesEvent.watch());
+                  return const CircularProgressIndicator();
+                },
+                streamLoaded: (stream) {
+                  return StreamBuilder<List<CategoryEntity>>(
+                    stream: stream,
+                    builder: (context, snapshot) {
+                      final categories = snapshot.data;
+                      return DropdownButtonFormField(
+                            value: initialValue == "" ? null : initialValue,
+                            items: categories?.map((category) => DropdownMenuItem<String>(
+                              value: category.id, // Usa el ID de la categoría como valor
+                              child: Text(category.name), // Muestra el nombre de la categoría
+                            )).toList(),
+                            onChanged: (value){
+                              onChanged(value.toString());
+                            },
+                          decoration: InputDecoration(
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: Colors.grey.shade400,
+                                width: 2,
+                              ),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              // border grey
+                              borderSide: BorderSide(
+                                color: Colors.grey.shade200,
+                                width: 2,
+                              ),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == null || value == "") {
+                              return validatorMessage;
+                            }
+                            return null;
+                          },
+                      );
+                    }
+                  );
+                });
+          }),
         SizedBox(height: 20)
       ],
     );

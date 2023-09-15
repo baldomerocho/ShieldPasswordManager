@@ -16,11 +16,19 @@ class HomePage extends StatelessWidget {
           LogOutWidget()
         ],
       ),
-      body: const Center(
-        child: Text('Home Page'),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,mainAxisSize: MainAxisSize.min,
+          children: [
+            Text('Home Page'),
+            ElevatedButton(onPressed: (){
+              Navigator.of(context).pushNamed('/passwords');
+            }, child: Text("arriba"))
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).pushNamed('/password_editor', arguments: [true, []]),
+        onPressed: () => Navigator.of(context).pushNamed('/password_editor'),
         child: const Icon(Icons.add),
       )
     );

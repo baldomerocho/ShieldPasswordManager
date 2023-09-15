@@ -1,7 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ptf/application/models/password_model.dart';
+import 'package:ptf/domain/entities/entities.dart';
 import 'package:ptf/domain/repositories/data_repository.dart';
+import 'package:ptf/infrastructure/datasources/firebase_firestore.dart';
 
 class DataRepositoryImpl implements DataRepository{
+  final Firestore database;
+  DataRepositoryImpl({required this.database});
   @override
   Future<DocumentSnapshot<Object?>> addCategory(String name) {
     // TODO: implement addCategory
@@ -9,10 +14,7 @@ class DataRepositoryImpl implements DataRepository{
   }
 
   @override
-  Future<DocumentSnapshot<Object?>> addPassword(String name, String password) {
-    // TODO: implement addPassword
-    throw UnimplementedError();
-  }
+  Future<PasswordEntity> createPassword(PasswordModel password) => database.createPassword(password: password);
 
   @override
   Future<DocumentSnapshot<Object?>> addTag(String name) {
@@ -26,17 +28,6 @@ class DataRepositoryImpl implements DataRepository{
     throw UnimplementedError();
   }
 
-  @override
-  Future<DocumentSnapshot<Object?>> deleteCategory(String name) {
-    // TODO: implement deleteCategory
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<DocumentSnapshot<Object?>> deletePassword(String name) {
-    // TODO: implement deletePassword
-    throw UnimplementedError();
-  }
 
   @override
   Future<DocumentSnapshot<Object?>> deleteTag(String name) {
@@ -45,10 +36,7 @@ class DataRepositoryImpl implements DataRepository{
   }
 
   @override
-  Future<DocumentSnapshot<Object?>> getCategories() {
-    // TODO: implement getCategories
-    throw UnimplementedError();
-  }
+  Stream<List<CategoryEntity>> watchCategories() => database.watchCategories();
 
   @override
   Future<DocumentSnapshot<Object?>> getFavouritesPasswords() {
@@ -57,10 +45,7 @@ class DataRepositoryImpl implements DataRepository{
   }
 
   @override
-  Future<DocumentSnapshot<Object?>> getPasswords() {
-    // TODO: implement getPasswords
-    throw UnimplementedError();
-  }
+  Stream<List<PasswordEntity>> watchPasswords({required String query}) => database.watchPasswords(query: query);
 
   @override
   Future<DocumentSnapshot<Object?>> getRecentViewedPasswords() {
@@ -74,11 +59,6 @@ class DataRepositoryImpl implements DataRepository{
     throw UnimplementedError();
   }
 
-  @override
-  Future<DocumentSnapshot<Object?>> searchPassword(String name) {
-    // TODO: implement searchPassword
-    throw UnimplementedError();
-  }
 
   @override
   Future<DocumentSnapshot<Object?>> tagPassword(String name, String tag) {
@@ -110,15 +90,28 @@ class DataRepositoryImpl implements DataRepository{
     throw UnimplementedError();
   }
 
-  @override
-  Future<DocumentSnapshot<Object?>> updatePassword(String name, String password) {
-    // TODO: implement updatePassword
-    throw UnimplementedError();
-  }
 
   @override
   Future<DocumentSnapshot<Object?>> updateTag(String name) {
     // TODO: implement updateTag
     throw UnimplementedError();
   }
+
+  @override
+  Future<DocumentSnapshot<Object?>> deleteCategory(String name) {
+    // TODO: implement deleteCategory
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> deletePassword(String id) => database.deletePassword(id: id);
+
+  @override
+  Stream<List<PasswordEntity>> searchPassword(String name) {
+    // TODO: implement searchPassword
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<PasswordEntity> updatePassword({required PasswordModel password, required String id})  => database.updatePassword(password:password, id:id);
 }
