@@ -55,35 +55,6 @@ class PasswordsPage extends StatelessWidget {
                                 ]));
                               }
                               return SliverList(delegate: SliverChildBuilderDelegate((context, index) {
-                                final password = data[index];
-                                // return ListTile(
-                                //     leading: CircleAvatar(
-                                //         child:  ImageFade(
-                                //           alignment: Alignment.center,
-                                //           placeholder: Container(
-                                //             color: const Color(0xFFCFCDCA),
-                                //             alignment: Alignment.center,
-                                //             child: const Icon(Icons.photo, color: Colors.white30, size: 20.0),
-                                //           ),
-                                //           loadingBuilder: (context, progress, chunkEvent) =>
-                                //               Center(child: CircularProgressIndicator(value: progress)),
-                                //           image: NetworkImage('https://www.google.com/s2/favicons?domain=${password.website}'),
-                                //           fit: BoxFit.contain,
-                                //           errorBuilder: (___,_) => Image.asset('assets/images/cancel.png'),
-                                //         )
-                                //     ),
-                                //     title: Text(password.username),
-                                //     subtitle: Text(password.password),
-                                //     onTap: () {
-                                //       Navigator.push(context, MaterialPageRoute(builder: (_) => PasswordEditor(isCreate: false, password: password)));
-                                //     },
-                                //     trailing: IconButton(
-                                //       onPressed: () {
-                                //         _deleteConfirmation(context, password.id);
-                                //       },
-                                //       icon: Icon(Icons.delete_outline, color: Colors.pink.shade200),
-                                //     )
-                                // );
                                 return PasswordItemButton(pass: data[index]);
                               }, childCount: data.length));
                             } else {

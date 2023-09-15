@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ptf/domain/entities/entities.dart';
 import 'package:ptf/presentation/blocs/blocs.dart';
 import 'package:ptf/presentation/widgets/get_all_passwords.dart';
+import 'package:ptf/presentation/widgets/password_item_button/password_item_button.dart';
 
 class LastViewedWidget extends StatelessWidget {
   const LastViewedWidget({super.key});
@@ -32,7 +33,7 @@ class LastViewedWidget extends StatelessWidget {
                       builder: (context, snapshot) {
                         if(snapshot.hasData){
                           return Column(
-                            children: snapshot.data!.map((e) => CupertinoListTile(title: Text(e.username), subtitle: Text(e.website),)).toList(),
+                            children: snapshot.data!.map((e) => PasswordItemButton(pass:e)).toList(),
                           );
                         }
                         return Container();

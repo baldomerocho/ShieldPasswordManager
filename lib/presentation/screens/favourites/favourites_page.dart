@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ptf/domain/entities/entities.dart';
@@ -34,9 +35,10 @@ class FavouritesPage extends StatelessWidget {
                   if(data!.isEmpty){
                     return Center(child: Text("Empty"));
                   }
-                  return ListView.builder(itemBuilder: (contex,index){
-                    return PasswordItemButton(pass: data![index]);
-                  }, itemCount: data?.length,);
+                  return CupertinoListSection.insetGrouped(
+                    header: Text("Favourites"),
+                    children: data.map((e) => PasswordItemButton(pass: e)).toList(),
+                  );
                 },
               )
             );

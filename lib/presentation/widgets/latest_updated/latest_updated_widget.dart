@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ptf/domain/entities/entities.dart';
 import 'package:ptf/presentation/blocs/blocs.dart';
 import 'package:ptf/presentation/widgets/get_all_passwords.dart';
+import 'package:ptf/presentation/widgets/password_item_button/password_item_button.dart';
 
 class LatestUpdatedWidget extends StatelessWidget {
   const LatestUpdatedWidget({super.key});
@@ -29,7 +30,7 @@ class LatestUpdatedWidget extends StatelessWidget {
                         header: Text("Latest 5 updated", style: Theme.of(context).textTheme.titleLarge!.copyWith(
                             color: Colors.white, fontWeight: FontWeight.bold
                         )),
-                        children: data?.map((e) => CupertinoListTile(title: Text(e.username), subtitle: Text(e.website),)).toList(),
+                        children: data?.map((e) => PasswordItemButton(pass:e)).toList(),
                         footer: GetAllPasswordsButton(message: "Mostrando las últimas 5 contraseñas editadas")
                     );
                   }
