@@ -10,12 +10,13 @@ abstract class DataRepository {
   Future<PasswordEntity> createPassword(PasswordModel password);
   Future<PasswordEntity> updatePassword({required PasswordModel password, required String id});
   Future<void> deletePassword(String id);
+  Future<void> setViewedPassword(String id);
 
-  Future<DocumentSnapshot> addToFavourites(String name);
-  Future<DocumentSnapshot> getFavouritesPasswords();
-  Future<DocumentSnapshot> takeLatestPassword();
-  Future<DocumentSnapshot> getRecentViewedPasswords();
-  Future<DocumentSnapshot> takeLatestUpdatedPassword();
+  Future<void> addToFavourites({required String passId, required bool value});
+  Stream<List<PasswordEntity>> watchFavouritesPasswords();
+  Stream<List<PasswordEntity>> watchLastCreatedPasswords();
+  Stream<List<PasswordEntity>> watchRecentViewedPasswords();
+  Stream<List<PasswordEntity>> watchLatestUpdatedPasswords();
 
   Future<DocumentSnapshot> tagPassword(String name, String tag);
   Future<DocumentSnapshot> untagPassword(String name, String tag);
@@ -26,6 +27,7 @@ abstract class DataRepository {
   Future<DocumentSnapshot> deleteTag(String name);
 
   Stream<List<CategoryEntity>> watchCategories();
+  Stream<List<CategoryEntity>> watchCategoriesSlider();
   Future<DocumentSnapshot> addCategory(String name);
   Future<DocumentSnapshot> updateCategory(String name);
   Future<DocumentSnapshot> deleteCategory(String name);

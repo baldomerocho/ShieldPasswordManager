@@ -15,6 +15,8 @@ class PasswordModel with _$PasswordModel {
     required String website,
     required String username,
     required String password,
+    required bool favorite,
+    required bool safe,
     @JsonKey(name: 'category_id')
     required String categoryId,
     @JsonKey(name: 'created_at')
@@ -23,6 +25,9 @@ class PasswordModel with _$PasswordModel {
     @JsonKey(name: 'updated_at')
     @TimestampConverter()
     required DateTime updatedAt,
+    @JsonKey(name: 'latest_viewed')
+    @TimestampConverter()
+    required DateTime latestViewed,
   }) = _PasswordModel;
 
   factory PasswordModel.fromJson(Map<String, dynamic> json) =>

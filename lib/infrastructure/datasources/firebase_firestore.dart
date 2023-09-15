@@ -21,6 +21,16 @@ class Firestore{
     });
   }
 
+  Stream<List<CategoryEntity>> watchCategoriesSlider(){
+    return database.collection("categories").snapshots().map((QuerySnapshot<Map<String, dynamic>> snapshot) {
+      return snapshot.docs.map((doc) {
+        final data = doc.data() as Map<String, dynamic>;
+        data['id'] = doc.id;
+        return CategoryEntity.fromJson(data);
+      }).toList();
+    });
+  }
+
   Future<DocumentReference> getTagsPassword(String id)async{
       return await database.collection("passwords").doc(id).collection("tags").add({"name":"tag"});
   }
@@ -50,9 +60,76 @@ class Firestore{
     await database.collection("passwords").doc(id).delete();
   }
 
+  Stream<List<PasswordEntity>> watchPasswordsFavourites() {
+    return database
+        .collection('passwords')
+        .where('favorite', isEqualTo: true)
+        .snapshots()
+        .map((QuerySnapshot<Map<String, dynamic>> snapshot) {
+      return snapshot.docs.map((doc) {
+        final data = doc.data() as Map<String, dynamic>;
+        data['id'] = doc.id;
+        return PasswordEntity.fromJson(data);
+      }).toList();
+    });
+  }
+
+  Future<void> setFavouritePassword({required String id, required bool favorite}) async {
+    await database.collection("passwords").doc(id).update({"favorite":favorite});
+  }
+
+  Future<void> setViewedPassword({required String id}) async {
+    await database.collection("passwords").doc(id).update({"latest_viewed": FieldValue.serverTimestamp()});
+  }
+
+  Stream<List<PasswordEntity>> watchRecentViewedPasswords() {
+    return database
+        .collection('passwords')
+        .orderBy("latest_viewed", descending: true)
+        .limit(3)
+        .snapshots()
+        .map((QuerySnapshot<Map<String, dynamic>> snapshot) {
+      return snapshot.docs.map((doc) {
+        final data = doc.data() as Map<String, dynamic>;
+        data['id'] = doc.id;
+        return PasswordEntity.fromJson(data);
+      }).toList();
+    });
+  }
+
+  Stream<List<PasswordEntity>> watchLatestUpdatedPasswords() {
+    return database
+        .collection('passwords')
+        .orderBy("updated_at", descending: true)
+        .limit(5)
+        .snapshots()
+        .map((QuerySnapshot<Map<String, dynamic>> snapshot) {
+      return snapshot.docs.map((doc) {
+        final data = doc.data() as Map<String, dynamic>;
+        data['id'] = doc.id;
+        return PasswordEntity.fromJson(data);
+      }).toList();
+    });
+  }
+
+  Stream<List<PasswordEntity>> watchLastCreatedPasswords() {
+    return database
+        .collection('passwords')
+        .orderBy("created_at", descending: true)
+        .limit(5)
+        .snapshots()
+        .map((QuerySnapshot<Map<String, dynamic>> snapshot) {
+      return snapshot.docs.map((doc) {
+        final data = doc.data() as Map<String, dynamic>;
+        data['id'] = doc.id;
+        return PasswordEntity.fromJson(data);
+      }).toList();
+    });
+  }
+
   Stream<List<PasswordEntity>> watchPasswords({required String query}) {
-    final queryText = query.toLowerCase();
-    if(queryText.isEmpty) {
+
+    if(query.isEmpty) {
       return database
           .collection('passwords')
           .orderBy("created_at", descending: true)
@@ -71,8 +148,9 @@ class Firestore{
         // .where('username', isLessThan: queryText + 'z')
         .where(
           Filter.or(
-              Filter("username", isEqualTo: queryText),
-              Filter("website", isEqualTo: queryText),
+              Filter("username", isEqualTo: query),
+              Filter("website", isEqualTo: query),
+              Filter("category_id", isEqualTo: query),
           )
         )
         .snapshots()

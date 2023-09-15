@@ -62,8 +62,8 @@ class InputField extends StatelessWidget {
               ),
               hintText: hint,
               contentPadding: const EdgeInsets.all(10),
-              prefixIcon: icon != null ? Icon(icon) :Icon (Icons.text_fields)
-
+              prefixIcon: icon != null ? Icon(icon) :Icon (Icons.text_fields),
+            prefixIconColor: Colors.grey,
             ),
           validator: (value) {
             if (value == null || value.isEmpty) {
@@ -82,7 +82,6 @@ class InputDropdown extends StatelessWidget {
   final String? initialValue;
   final String? label;
   final String? validatorMessage;
-  // on change
   final ValueChanged<String> onChanged;
 
   const InputDropdown({
@@ -95,7 +94,6 @@ class InputDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<CategoryEntity> items = [];
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,7 +112,9 @@ class InputDropdown extends StatelessWidget {
                     stream: stream,
                     builder: (context, snapshot) {
                       final categories = snapshot.data;
+                      print(categories);
                       return DropdownButtonFormField(
+                            isDense: true,
                             value: initialValue == "" ? null : initialValue,
                             items: categories?.map((category) => DropdownMenuItem<String>(
                               value: category.id, // Usa el ID de la categoría como valor
@@ -125,6 +125,8 @@ class InputDropdown extends StatelessWidget {
                             },
                           decoration: InputDecoration(
                             isDense: true,
+                            prefixIcon: Icon(Icons.list, color: Colors.grey),
+                            // if on focused pink icon else grey
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide(

@@ -7,6 +7,8 @@ import 'package:ptf/domain/entities/password_entity.dart';
 import 'package:ptf/presentation/blocs/blocs.dart';
 import 'package:ptf/presentation/widgets/input_field.dart';
 
+import 'persistent_header_editor.dart';
+
 class PasswordEditor extends StatefulWidget {
   final bool isCreate;
   final PasswordEntity? password;
@@ -18,13 +20,14 @@ class PasswordEditor extends StatefulWidget {
   State<PasswordEditor> createState() => _PasswordEditorState();
 }
 
-class _PasswordEditorState extends State<PasswordEditor> {
+class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProviderStateMixin{
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _websiteController = TextEditingController();
   String _categoryID = "";
-  bool _saved = false;
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  late AnimationController _animationController;
 
   late PasswordEntity passEditing;
   bool isCreate = true;
@@ -47,6 +50,20 @@ class _PasswordEditorState extends State<PasswordEditor> {
       }
     }
 
+    _animationController = AnimationController(
+      vsync: this, // "this" se refiere a la instancia de _MyWidgetState
+      duration: Duration(seconds: 2),
+    );
+
+    _animationController.addListener(() {
+      // Se llama cada vez que cambia el valor de la animación
+    });
+
+    _animationController.addStatusListener((status) {
+      // Se llama cuando cambia el estado de la animación (completa, reinicia, etc.)
+    });
+
+
     super.initState();
   }
 
@@ -56,6 +73,7 @@ class _PasswordEditorState extends State<PasswordEditor> {
     _usernameController.dispose();
     _websiteController.dispose();
     _formKey.currentState?.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 
@@ -66,14 +84,24 @@ class _PasswordEditorState extends State<PasswordEditor> {
         key: _formKey,
         child: CustomScrollView(
           slivers: [
-            SliverAppBar(
-              pinned: true,
-              expandedHeight: 150.0,
-              backgroundColor: Colors.pink.shade50,
-              foregroundColor: Colors.pink.shade900,
-              flexibleSpace: FlexibleSpaceBar(
-                title: Text(
-                    isCreate ? "Create New Vaults" : "Update Password"),
+            SliverPersistentHeader(delegate: PersistentHeaderEditor(
+              height: 200,
+              status: isCreate,
+              animationController:_animationController,
+              ), floating: true, pinned: false,),
+            SliverPadding(
+              padding: EdgeInsets.only(left: 16),
+              sliver: SliverToBoxAdapter(
+                child: Container(
+                  margin: EdgeInsets.only(top: 16),
+                  child: Text(
+                    "Credential",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    )
+                  ),
+                ),
               ),
             ),
             SliverPadding(padding: EdgeInsets.all(16), sliver:
@@ -88,22 +116,22 @@ class _PasswordEditorState extends State<PasswordEditor> {
               ),
               InputField(controller: _websiteController,
                 label: "Site Address",
-                icon: Icons.network_wifi_outlined,
+                icon: Icons.cloud,
                 iconColor: Colors.pink,
                 validatorMessage: "required",),
               InputField(controller: _usernameController,
                   label: "User Name",
-                  icon: Icons.network_wifi_outlined,
+                  icon: Icons.person,
                   iconColor: Colors.pink,
                   validatorMessage: "required"),
               InputField(controller: _passwordController,
                   label: "Password",
-                  icon: Icons.network_wifi_outlined,
+                  icon: Icons.lock,
                   iconColor: Colors.pink,
                   validatorMessage: "required"),
-              Icon(Icons.verified, color: _saved ? Colors.teal : Colors.grey.shade300, size: 50,)
             ]))
             ),
+            SliverToBoxAdapter(child: SizedBox(height: 500))
           ],
         ),
       ),
@@ -120,12 +148,7 @@ class _PasswordEditorState extends State<PasswordEditor> {
               Navigator.of(context).pop();
               setState(() {
                 passEditing = created.pass;
-                _saved = true;
                 isCreate = false;
-              });
-              await Future.delayed(Duration(seconds: 1));
-              setState(() {
-                _saved = false;
               });
             },
             error: (_){
@@ -172,6 +195,9 @@ class _PasswordEditorState extends State<PasswordEditor> {
                     categoryId: _categoryID,
                     createdAt: DateTime.now(),
                     updatedAt: DateTime.now(),
+                    favorite: false,
+                    latestViewed: DateTime.now(),
+                    safe: true,
                   );
                   print(password);
                   if (_formKey.currentState!.validate() &&
@@ -200,12 +226,7 @@ class _PasswordEditorState extends State<PasswordEditor> {
               Navigator.of(context).pop();
               setState(() {
                 passEditing = updated.pass;
-                _saved = true;
                 isCreate = false;
-              });
-              await Future.delayed(Duration(seconds: 1));
-              setState(() {
-                _saved = false;
               });
             },
             error: (_){
@@ -247,6 +268,9 @@ class _PasswordEditorState extends State<PasswordEditor> {
                     categoryId: _categoryID,
                     createdAt: passEditing != null ? passEditing.createdAt : DateTime.now(),
                     updatedAt: DateTime.now(),
+                    favorite: passEditing.favorite,
+                    latestViewed: DateTime.now(),
+                    safe: passEditing.safe,
                   );
                   print(password);
                   if (_formKey.currentState!.validate() &&

@@ -14,11 +14,15 @@ class UpdatePassBloc extends Bloc<UpdatePassEvent, UpdatePassState> {
     on<_Send>((event, emit) async {
       try{
         emit(const UpdatePassState.loading());
+        await Future.delayed(const Duration(seconds: 1));
         PasswordEntity pass = await repository.updatePassword(password: event.password, id: event.id);
         emit(UpdatePassState.success(pass));
       } on Exception catch(_){
         emit(const UpdatePassState.error());
       }
+
+      await Future.delayed(const Duration(seconds: 2));
+      emit(const UpdatePassState.initial());
     });
   }
 }

@@ -23,10 +23,7 @@ class DataRepositoryImpl implements DataRepository{
   }
 
   @override
-  Future<DocumentSnapshot<Object?>> addToFavourites(String name) {
-    // TODO: implement addToFavourites
-    throw UnimplementedError();
-  }
+  Future<void> addToFavourites({required String passId, required bool value}) => database.setFavouritePassword(id: passId, favorite: value);
 
 
   @override
@@ -39,19 +36,13 @@ class DataRepositoryImpl implements DataRepository{
   Stream<List<CategoryEntity>> watchCategories() => database.watchCategories();
 
   @override
-  Future<DocumentSnapshot<Object?>> getFavouritesPasswords() {
-    // TODO: implement getFavouritesPasswords
-    throw UnimplementedError();
-  }
+  Stream<List<PasswordEntity>> watchFavouritesPasswords() => database.watchPasswordsFavourites();
 
   @override
   Stream<List<PasswordEntity>> watchPasswords({required String query}) => database.watchPasswords(query: query);
 
   @override
-  Future<DocumentSnapshot<Object?>> getRecentViewedPasswords() {
-    // TODO: implement getRecentViewedPasswords
-    throw UnimplementedError();
-  }
+  Stream<List<PasswordEntity>> watchRecentViewedPasswords() => database.watchRecentViewedPasswords();
 
   @override
   Future<DocumentSnapshot<Object?>> getTags() {
@@ -67,16 +58,10 @@ class DataRepositoryImpl implements DataRepository{
   }
 
   @override
-  Future<DocumentSnapshot<Object?>> takeLatestPassword() {
-    // TODO: implement takeLatestPassword
-    throw UnimplementedError();
-  }
+  Stream<List<PasswordEntity>> watchLastCreatedPasswords() => database.watchLastCreatedPasswords();
 
   @override
-  Future<DocumentSnapshot<Object?>> takeLatestUpdatedPassword() {
-    // TODO: implement takeLatestUpdatedPassword
-    throw UnimplementedError();
-  }
+  Stream<List<PasswordEntity>> watchLatestUpdatedPasswords() => database.watchLatestUpdatedPasswords();
 
   @override
   Future<DocumentSnapshot<Object?>> untagPassword(String name, String tag) {
@@ -114,4 +99,10 @@ class DataRepositoryImpl implements DataRepository{
 
   @override
   Future<PasswordEntity> updatePassword({required PasswordModel password, required String id})  => database.updatePassword(password:password, id:id);
+
+  @override
+  Stream<List<CategoryEntity>> watchCategoriesSlider() => database.watchCategoriesSlider();
+
+  @override
+  Future<void> setViewedPassword(String id) => database.setViewedPassword(id: id);
 }

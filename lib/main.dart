@@ -8,6 +8,7 @@ import 'package:ptf/infrastructure/datasources/firebase_authentication.dart';
 import 'package:ptf/infrastructure/datasources/firebase_firestore.dart';
 import 'package:ptf/infrastructure/repositories/authentication_repository_impl.dart';
 import 'package:ptf/infrastructure/repositories/data_repository_impl.dart';
+import 'package:ptf/presentation/blocs/data/set_pass_favourite/set_pass_favourite_bloc.dart';
 import 'package:ptf/routes.dart';
 
 import 'firebase_options.dart';
@@ -46,8 +47,15 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => SavePassBloc(repository: dataRepository)),
         BlocProvider(create: (_) => UpdatePassBloc(repository: dataRepository)),
         BlocProvider(create: (_) => DeletePassBloc(repository: dataRepository)),
+        BlocProvider(create: (_) => SetPassFavouriteBloc(repository: dataRepository)),
+        BlocProvider(create: (_) => SetViewedBloc(repository: dataRepository)),
+        BlocProvider(create: (_) => TakeLastViewsBloc(repository: dataRepository)),
+        BlocProvider(create: (_) => TakeLastCreatedBloc(repository: dataRepository)),
+        BlocProvider(create: (_) => TakeLatestUpdatedBloc(repository: dataRepository)),
         BlocProvider(create: (_) => WatchPasswordsBloc(repository: dataRepository)),
         BlocProvider(create: (_) => WatchCategoriesBloc(repository: dataRepository)),
+        BlocProvider(create: (_) => WatchCategoriesSliderBloc(repository: dataRepository)),
+        BlocProvider(create: (_) => WatchPassFavouritesBloc(repository: dataRepository)),
       ],
       child: MaterialApp(
         title: 'SHIELD PASS',
@@ -55,6 +63,18 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.pink),
           useMaterial3: true,
           fontFamily: "DM Sans",
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              elevation: 0,
+              backgroundColor: Colors.white,
+              foregroundColor: Colors.blue,
+            )
+          ),
+          floatingActionButtonTheme: FloatingActionButtonThemeData(
+            elevation: 0,
+            backgroundColor: Colors.pink.shade200,
+            foregroundColor: Colors.white,
+          ),
         ),
         home: const InSession(),
         initialRoute: "/",
