@@ -22,25 +22,18 @@ class LastViewedWidget extends StatelessWidget {
               return Container();
             },
             loading: () => CupertinoActivityIndicator(),
-            streamLoaded: (stream) => CupertinoListSection.insetGrouped(
-              backgroundColor: Colors.orange,
-                header: Text("Latest 3 viewed", style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    color: Colors.white, fontWeight: FontWeight.bold
-                )),
-                children: [
-                  StreamBuilder<List<PasswordEntity>>(
-                      stream: stream,
-                      builder: (context, snapshot) {
-                        if(snapshot.hasData){
-                          return Column(
-                            children: snapshot.data!.map((e) => PasswordItemButton(pass:e)).toList(),
-                          );
-                        }
-                        return Container();
-                      }
-                  )
-                ],
-                footer: GetAllPasswordsButton(message: "Mostrando las últimas 3 contraseñas vistas recientemente")
+            streamLoaded: (stream) => StreamBuilder<List<PasswordEntity>>(
+              stream: stream,
+              builder: (context, snapshot) {
+                return CupertinoListSection.insetGrouped(
+                  backgroundColor: Colors.orange,
+                    header: Text("Latest 3 viewed", style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: Colors.white, fontWeight: FontWeight.bold
+                    )),
+                    children: snapshot.data?.map((e) => PasswordItemButton(pass:e)).toList(),
+                    footer: GetAllPasswordsButton(message: "Mostrando las últimas 3 contraseñas vistas recientemente")
+                );
+              }
             ),
           );
         },

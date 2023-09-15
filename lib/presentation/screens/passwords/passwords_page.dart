@@ -1,12 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_fade/image_fade.dart';
 import 'package:lottie/lottie.dart';
 import 'package:ptf/domain/entities/password_entity.dart';
 import 'package:ptf/presentation/blocs/blocs.dart';
-import 'package:ptf/presentation/widgets/editor/password.dart';
-import 'package:ptf/presentation/widgets/input_field.dart';
 import 'package:ptf/presentation/widgets/password_item_button/password_item_button.dart';
 
 import 'persistent_header_passwords.dart';
@@ -54,9 +51,13 @@ class PasswordsPage extends StatelessWidget {
                                   )
                                 ]));
                               }
-                              return SliverList(delegate: SliverChildBuilderDelegate((context, index) {
-                                return PasswordItemButton(pass: data[index]);
-                              }, childCount: data.length));
+                              return SliverFillRemaining(
+                                  child: CupertinoListSection.insetGrouped(
+                                    header: Text("Passwords", style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                                        fontWeight: FontWeight.bold
+                                    )),
+                                    children: data.map((e) => PasswordItemButton(pass: e)).toList(),
+                                  ));
                             } else {
                              return SliverFillViewport(delegate: SliverChildListDelegate([const CircularProgressIndicator()]));
                             }

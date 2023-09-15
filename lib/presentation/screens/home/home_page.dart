@@ -14,11 +14,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> list1 = ["google.com", "facebook.com", "twitter.com"];
-    List<String> list = ["google.com", "facebook.com", "twitter.com", "youtube.com", "instagram.com"];
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Page'),
+        title: const Text('Shield Password Manager'),
         actions: const [
           LogOutWidget()
         ],
