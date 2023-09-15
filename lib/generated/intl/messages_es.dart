@@ -25,6 +25,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accept": MessageLookupByLibrary.simpleMessage("Aceptar"),
+        "add": MessageLookupByLibrary.simpleMessage("Añadir"),
+        "addTag": MessageLookupByLibrary.simpleMessage("Añadir etiqueta"),
         "all": MessageLookupByLibrary.simpleMessage("Todas"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancelar"),
         "categories": MessageLookupByLibrary.simpleMessage("Categorías"),
@@ -38,6 +40,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Eliminar contraseña"),
         "deletePasswordMessage": MessageLookupByLibrary.simpleMessage(
             "¿Estás seguro de que quieres eliminar esta contraseña?"),
+        "deleteTag": MessageLookupByLibrary.simpleMessage("Eliminar etiqueta"),
+        "deleteTagMessage": MessageLookupByLibrary.simpleMessage(
+            "¿Estás seguro de que quieres eliminar esta etiqueta?"),
         "deleted": MessageLookupByLibrary.simpleMessage("Eliminado"),
         "edit": MessageLookupByLibrary.simpleMessage("Editar"),
         "email": MessageLookupByLibrary.simpleMessage("Correo electrónico"),
@@ -82,6 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Dirección del sitio"),
         "siteAddressRequired": MessageLookupByLibrary.simpleMessage(
             "Dirección del sitio requerida"),
+        "tag": MessageLookupByLibrary.simpleMessage("Etiqueta"),
         "tags": MessageLookupByLibrary.simpleMessage("Etiquetas"),
         "update": MessageLookupByLibrary.simpleMessage("Actualizar"),
         "updating": MessageLookupByLibrary.simpleMessage("Actualizando..."),

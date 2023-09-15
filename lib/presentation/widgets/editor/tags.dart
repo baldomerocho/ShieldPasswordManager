@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ptf/local.dart';
 import 'package:ptf/presentation/widgets/input_field.dart';
 
 class TagsWidget extends StatelessWidget {
@@ -10,6 +11,7 @@ class TagsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final labels = AppLocalizations.of(context)!;
     TextEditingController controller = TextEditingController();
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -21,7 +23,7 @@ class TagsWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Tags", style: Theme.of(context).textTheme.titleMedium),
+              Text(labels.tags, style: Theme.of(context).textTheme.titleMedium),
               Wrap(
                 children: [ ...tags.map((e) => Container(
                   margin: const EdgeInsets.only(right: 8.0),
@@ -30,18 +32,18 @@ class TagsWidget extends StatelessWidget {
                     onPressed: () {
                       showDialog(context: context, builder: (delete){
                         return AlertDialog(
-                          title: Text("Delete tag \'$e\'"),
-                          content: Text("Are you sure you want to delete this tag?"),
+                          title: Text("${labels.deleteTag} \'$e\'"),
+                          content: Text(labels.deleteTagMessage),
                           actions: [
                             TextButton(
                               onPressed: () => Navigator.pop(context),
-                              child: Text("Cancel"),
+                              child: Text(labels.cancel),
                             ),
                             TextButton(
                               onPressed: () {
                                 onRemoveTag(e);
                               },
-                              child: Text("Delete"),
+                              child: Text(labels.deleteTag),
                             )
                           ],
                         );
@@ -49,24 +51,24 @@ class TagsWidget extends StatelessWidget {
                     },
                     ),
                 )).toList(),  ActionChip(
-                  label: Text("Add +"),
+                  label: Text("${labels.add} +"),
                   backgroundColor: Colors.grey.shade200,
                   labelStyle: TextStyle(color: Colors.grey.shade700),
                   onPressed: (){
                     showModalBottomSheet(context: context, builder: (modalctx){
                       return Scaffold(
                         appBar: AppBar(
-                          title: Text("Add tag"),
+                          title: Text(labels.addTag),
                         ),
                         body: ListView(
                           padding: const EdgeInsets.all(16.0),
                           children: [
-                            InputField(label: "nombre", controller: controller,),
+                            InputField(label: labels.tag, controller: controller,),
                             CupertinoButton(
                                 onPressed: () {
                                   onAddTag(controller.text);
                                   controller.clear();
-                                }, child: Text("Add"),
+                                }, child: Text(labels.add),
                                 color: CupertinoColors.systemPink
                             )
                           ],

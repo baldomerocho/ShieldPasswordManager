@@ -47,5 +47,10 @@
   "create": "Crear",
   "edit": "Editar",
   "creating": "Creando...",
-  "updating": "Actualizando..."
+  "updating": "Actualizando...",
+  "add": "Añadir",
+  "addTag": "Añadir etiqueta",
+  "deleteTag": "Eliminar etiqueta",
+  "tag": "Etiqueta",
+  "deleteTagMessage": "¿Estás seguro de que quieres eliminar esta etiqueta?"
 }

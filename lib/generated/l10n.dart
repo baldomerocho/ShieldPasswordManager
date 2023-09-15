@@ -539,6 +539,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Add`
+  String get add {
+    return Intl.message(
+      'Add',
+      name: 'add',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Tag`
+  String get addTag {
+    return Intl.message(
+      'Add Tag',
+      name: 'addTag',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Tag`
+  String get deleteTag {
+    return Intl.message(
+      'Delete Tag',
+      name: 'deleteTag',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tag`
+  String get tag {
+    return Intl.message(
+      'Tag',
+      name: 'tag',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this tag?`
+  String get deleteTagMessage {
+    return Intl.message(
+      'Are you sure you want to delete this tag?',
+      name: 'deleteTagMessage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
