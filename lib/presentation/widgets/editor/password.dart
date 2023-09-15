@@ -8,6 +8,7 @@ import 'package:ptf/application/models/password_model.dart';
 import 'package:ptf/domain/entities/password_entity.dart';
 import 'package:ptf/local.dart';
 import 'package:ptf/presentation/blocs/blocs.dart';
+import 'package:ptf/presentation/widgets/editor/tags.dart';
 import 'package:ptf/presentation/widgets/input_field.dart';
 
 import 'persistent_header_editor.dart';
@@ -28,6 +29,7 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _websiteController = TextEditingController();
   String _categoryID = "";
+  List<String> _tags = [];
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   late AnimationController _animationController;
@@ -45,6 +47,7 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
       _usernameController.text = passEditing.username;
       _passwordController.text = passEditing.password;
       _categoryID = passEditing.categoryId;
+      _tags = passEditing.tags;
     } else {
       if(kDebugMode){
         _websiteController.text = "google.com";
@@ -84,6 +87,7 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context)!;
     return Scaffold(
+      backgroundColor: CupertinoColors.secondarySystemBackground,
       body: Form(
         key: _formKey,
         child: CustomScrollView(
@@ -93,53 +97,69 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
               status: isCreate,
               animationController:_animationController,
               ), floating: true, pinned: false,),
-            SliverPadding(
-              padding: const EdgeInsets.only(left: 16),
-              sliver: SliverToBoxAdapter(
-                child: Container(
-                  margin: const EdgeInsets.only(top: 16),
-                  child: Text(
-                    labels.credential,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    )
-                  ),
-                ),
-              ),
-            ),
-            SliverPadding(padding: const EdgeInsets.all(16), sliver:
+
+            SliverPadding(padding: const EdgeInsets.all(8), sliver:
             SliverList(delegate: SliverChildListDelegate([
-              InputDropdown(
-                initialValue: _categoryID,
-                validatorMessage: labels.categoriesRequired,
-                label: labels.categories,
-                onChanged: (value) {
-                  _categoryID = value;
-                },
+              Card(
+                color: Colors.white,
+                elevation: 0,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                        labels.credential,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        )
+                    ),
+                    InputDropdown(
+                      initialValue: _categoryID,
+                      validatorMessage: labels.categoriesRequired,
+                      label: labels.categories,
+                      onChanged: (value) {
+                        _categoryID = value;
+                      },
+                    ),
+                    InputField(controller: _websiteController,
+                      label: labels.siteAddress,
+                      icon: Icons.cloud,
+                      iconColor: Colors.pink,
+                      validatorMessage: labels.siteAddressRequired,),
+                    InputField(controller: _usernameController,
+                        label: labels.username,
+                        icon: Icons.person,
+                        iconColor: Colors.pink,
+                        validatorMessage: labels.usernameRequired),
+                    InputField(controller: _passwordController,
+                        label: labels.password,
+                        icon: Icons.lock,
+                        iconColor: Colors.pink,
+                        validatorMessage: labels.passwordRequired),
+                  ],
               ),
-              InputField(controller: _websiteController,
-                label: labels.siteAddress,
-                icon: Icons.cloud,
-                iconColor: Colors.pink,
-                validatorMessage: labels.siteAddressRequired,),
-              InputField(controller: _usernameController,
-                  label: labels.username,
-                  icon: Icons.person,
-                  iconColor: Colors.pink,
-                  validatorMessage: labels.usernameRequired),
-              InputField(controller: _passwordController,
-                  label: labels.password,
-                  icon: Icons.lock,
-                  iconColor: Colors.pink,
-                  validatorMessage: labels.passwordRequired),
+                ),)
             ]))
             ),
-            const SliverToBoxAdapter(child: SizedBox(height: 500))
+            const SliverToBoxAdapter(child: SizedBox(height: 15)),
+            SliverToBoxAdapter(child: TagsWidget(onAddTag: (String value){
+              setState(() {
+                _tags = [..._tags, value];
+              });
+              Navigator.pop(context);
+            }, onRemoveTag: (String value){
+              setState(() {
+                _tags = _tags.where((element) => element != value).toList();
+              });
+              Navigator.pop(context);
+            },tags: _tags),),
+            SliverToBoxAdapter(child: isCreate ? _createButton(context, _formKey,labels) : _updateButton(context,  _formKey,labels),)
           ],
         ),
       ),
-      bottomSheet: isCreate ? _createButton(context, _formKey,labels) : _updateButton(context,  _formKey,labels)
     );
   }
 
@@ -200,6 +220,7 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
                     favorite: false,
                     latestViewed: DateTime.now(),
                     safe: true,
+                    tags: _tags
                   );
                   if (formKey.currentState!.validate() &&
                       password.categoryId.isNotEmpty) {
@@ -271,6 +292,7 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
                     favorite: passEditing.favorite,
                     latestViewed: DateTime.now(),
                     safe: passEditing.safe,
+                    tags: _tags
                   );
                   if (formKey.currentState!.validate() &&
                       password.categoryId.isNotEmpty) {

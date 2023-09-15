@@ -18,6 +18,7 @@ class PasswordEntity with _$PasswordEntity {
     required String password,
     required bool favorite,
     required bool safe,
+    required List<String> tags,
     @JsonKey(name: 'category_id')
     required String categoryId,
     @JsonKey(name: 'created_at')

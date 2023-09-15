@@ -77,6 +77,11 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.pink.shade200,
             foregroundColor: Colors.white,
           ),
+          chipTheme: ChipThemeData(
+            backgroundColor: Colors.pink.shade50,
+            labelStyle: TextStyle(color: Colors.pink.shade400, fontWeight: FontWeight.bold),
+            side: BorderSide.none
+          )
         ),
         home: const InSession(),
         initialRoute: "/",
