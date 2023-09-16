@@ -52,5 +52,6 @@
   "addTag": "Añadir etiqueta",
   "deleteTag": "Eliminar etiqueta",
   "tag": "Etiqueta",
-  "deleteTagMessage": "¿Estás seguro de que quieres eliminar esta etiqueta?"
+  "deleteTagMessage": "¿Estás seguro de que quieres eliminar esta etiqueta?",
+  "language": "Idioma"
 }

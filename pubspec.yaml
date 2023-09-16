@@ -28,6 +28,8 @@ dependencies:
   firebase_auth: ^4.9.0
   sign_in_with_apple: ^5.0.0
   cached_network_image: ^3.2.3
+  equatable: ^2.0.5
+  shared_preferences: ^2.2.1
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +73,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/flags/
     - assets/lotties/
 
   fonts:

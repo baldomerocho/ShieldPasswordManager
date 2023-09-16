@@ -53,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "favouritesCard": MessageLookupByLibrary.simpleMessage(
             "¡Tus contraseñas Favoritas para acceder a ellas rápidamente!"),
         "getAll": MessageLookupByLibrary.simpleMessage("Ver todas"),
+        "language": MessageLookupByLibrary.simpleMessage("Idioma"),
         "latestAdded": MessageLookupByLibrary.simpleMessage("Últimas añadidas"),
         "latestAddedCard": MessageLookupByLibrary.simpleMessage(
             "¡Mostrando tus últimas contraseñas añadidas!"),

@@ -58,43 +58,50 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => WatchCategoriesBloc(repository: dataRepository)),
         BlocProvider(create: (_) => WatchCategoriesSliderBloc(repository: dataRepository)),
         BlocProvider(create: (_) => WatchPassFavouritesBloc(repository: dataRepository)),
+        BlocProvider(create: (_) => LanguageBloc()),
       ],
-      child: MaterialApp(
-        title: 'SHIELD PASS',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.pink),
-          useMaterial3: true,
-          fontFamily: "DM Sans",
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              elevation: 0,
-              backgroundColor: Colors.white,
-              foregroundColor: Colors.blue,
-            )
-          ),
-          floatingActionButtonTheme: FloatingActionButtonThemeData(
-            elevation: 0,
-            backgroundColor: Colors.pink.shade200,
-            foregroundColor: Colors.white,
-          ),
-          chipTheme: ChipThemeData(
-            backgroundColor: Colors.pink.shade50,
-            labelStyle: TextStyle(color: Colors.pink.shade400, fontWeight: FontWeight.bold),
-            side: BorderSide.none
-          )
-        ),
-        home: const InSession(),
-        initialRoute: "/",
-        routes: RoutesApp.way,
-        localizationsDelegates: const [
-          AppLocalizations.delegate, // Add this line
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('es'), // Spanish
-        ],
+      child: BlocBuilder<LanguageBloc, LanguageState>(
+        builder: (context, state) {
+          return MaterialApp(
+              title: 'SHIELD PASS',
+              theme: ThemeData(
+                colorScheme: ColorScheme.fromSeed(seedColor: Colors.pink),
+                useMaterial3: true,
+                fontFamily: "DM Sans",
+                elevatedButtonTheme: ElevatedButtonThemeData(
+                  style: ElevatedButton.styleFrom(
+                    elevation: 0,
+                    backgroundColor: Colors.white,
+                    foregroundColor: Colors.blue,
+                  )
+                ),
+                floatingActionButtonTheme: FloatingActionButtonThemeData(
+                  elevation: 0,
+                  backgroundColor: Colors.pink.shade200,
+                  foregroundColor: Colors.white,
+                ),
+                chipTheme: ChipThemeData(
+                  backgroundColor: Colors.pink.shade50,
+                  labelStyle: TextStyle(color: Colors.pink.shade400, fontWeight: FontWeight.bold),
+                  side: BorderSide.none
+                )
+              ),
+              home: const InSession(),
+              initialRoute: "/",
+              routes: RoutesApp.way,
+              localizationsDelegates: const [
+                AppLocalizations.delegate, // Add this line
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: const [
+                Locale('es'),
+                Locale('en'),
+              ],
+              locale: state.selectedLanguage.value
+            );
+        },
       ),
     );
   }

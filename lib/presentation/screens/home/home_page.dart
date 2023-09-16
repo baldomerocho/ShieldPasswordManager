@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ptf/local.dart';
 import 'package:ptf/presentation/blocs/blocs.dart';
+import 'package:ptf/presentation/settings/international_dropdown.dart';
 import 'package:ptf/presentation/widgets/favourites_card/favourites_card.dart';
 import 'package:ptf/presentation/widgets/last_created/last_created_widget.dart';
 import 'package:ptf/presentation/widgets/last_viewed/last_viewed.dart';
@@ -24,6 +25,7 @@ class HomePage extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: const [
+          InternationalDropdown(),
           FavouritesCard(),
           SizedBox(height: 20),
           LastViewedWidget(),

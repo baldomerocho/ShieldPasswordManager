@@ -53,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "favouritesCard": MessageLookupByLibrary.simpleMessage(
             "Add your most important passwords to Favorites for quick access!"),
         "getAll": MessageLookupByLibrary.simpleMessage("Get All"),
+        "language": MessageLookupByLibrary.simpleMessage("Language"),
         "latestAdded": MessageLookupByLibrary.simpleMessage("Latest Added"),
         "latestAddedCard": MessageLookupByLibrary.simpleMessage(
             "Latest added passwords are automatically added to this list for quick access!"),

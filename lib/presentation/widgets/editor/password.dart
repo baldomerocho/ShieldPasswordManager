@@ -87,7 +87,6 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: CupertinoColors.secondarySystemBackground,
       body: Form(
         key: _formKey,
         child: CustomScrollView(
@@ -101,6 +100,10 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
             SliverPadding(padding: const EdgeInsets.all(8), sliver:
             SliverList(delegate: SliverChildListDelegate([
               Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  side: BorderSide(color: Colors.grey.shade300, width: 2),
+                ),
                 color: Colors.white,
                 elevation: 0,
                 child: Padding(
@@ -144,7 +147,6 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
                 ),)
             ]))
             ),
-            const SliverToBoxAdapter(child: SizedBox(height: 15)),
             SliverToBoxAdapter(child: TagsWidget(onAddTag: (String value){
               setState(() {
                 _tags = [..._tags, value];

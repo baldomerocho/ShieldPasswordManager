@@ -16,6 +16,10 @@ class TagsWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+          side: BorderSide(color: Colors.grey.shade300, width: 2),
+        ),
         color: Colors.white,
         elevation: 0,
         child: Padding(

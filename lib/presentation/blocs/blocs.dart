@@ -12,3 +12,5 @@ export 'data/set_viewed/set_viewed_bloc.dart';
 export 'data/take_last_views/take_last_views_bloc.dart';
 export 'data/take_last_created/take_last_created_bloc.dart';
 export 'data/take_latest_updated/take_latest_updated_bloc.dart';
+
+export 'app/language/language_bloc.dart';
