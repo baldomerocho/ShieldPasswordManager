@@ -59,15 +59,13 @@ class TagsWidget extends StatelessWidget {
                   backgroundColor: Colors.grey.shade200,
                   labelStyle: TextStyle(color: Colors.grey.shade700),
                   onPressed: (){
-                    showModalBottomSheet(context: context, builder: (modalctx){
-                      return Scaffold(
-                        appBar: AppBar(
-                          title: Text(labels.addTag),
-                        ),
-                        body: ListView(
-                          padding: const EdgeInsets.all(16.0),
+                    showDialog(context: context, builder: (modalctx){
+                      return AlertDialog(
+                        backgroundColor: Colors.white,
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            InputField(label: labels.tag, controller: controller,),
+                            InputField(label: labels.tag, controller: controller,icon: CupertinoIcons.tag,),
                             CupertinoButton(
                                 onPressed: () {
                                   onAddTag(controller.text);

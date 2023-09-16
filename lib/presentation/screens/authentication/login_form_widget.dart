@@ -67,6 +67,7 @@ class LoginFormWidget extends StatelessWidget {
                                   EmailPassword user = EmailPassword(email: emailController.text, password: passwordController.text);
                                   context.read<AuthenticationBloc>().add(AuthenticationEvent.newLoginEvent(AuthenticationProvider.email, credentials: user));
                                 }
+                                FocusScope.of(context).unfocus();
                             },
                               child: Text(labels.login),
                             ),

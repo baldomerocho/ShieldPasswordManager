@@ -34,7 +34,6 @@ class InputField extends StatelessWidget {
       children: [
         Text("$label", style: Theme.of(context).textTheme.titleMedium),
         TextFormField(
-          autofocus: true,
           controller: controller,
           decoration: InputDecoration(
               border: OutlineInputBorder(

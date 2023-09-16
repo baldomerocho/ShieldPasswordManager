@@ -87,79 +87,82 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context)!;
     return Scaffold(
-      body: Form(
-        key: _formKey,
-        child: CustomScrollView(
-          slivers: [
-            SliverPersistentHeader(delegate: PersistentHeaderEditor(
-              height: 200,
-              status: isCreate,
-              animationController:_animationController,
-              ), floating: true, pinned: false,),
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Form(
+          key: _formKey,
+          child: CustomScrollView(
+            slivers: [
+              SliverPersistentHeader(delegate: PersistentHeaderEditor(
+                height: 200,
+                status: isCreate,
+                animationController:_animationController,
+                ), floating: true, pinned: false,),
 
-            SliverPadding(padding: const EdgeInsets.all(8), sliver:
-            SliverList(delegate: SliverChildListDelegate([
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  side: BorderSide(color: Colors.grey.shade300, width: 2),
+              SliverPadding(padding: const EdgeInsets.all(8), sliver:
+              SliverList(delegate: SliverChildListDelegate([
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    side: BorderSide(color: Colors.grey.shade300, width: 2),
+                  ),
+                  color: Colors.white,
+                  elevation: 0,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                          labels.credential,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          )
+                      ),
+                      InputDropdown(
+                        initialValue: _categoryID,
+                        validatorMessage: labels.categoriesRequired,
+                        label: labels.categories,
+                        onChanged: (value) {
+                          _categoryID = value;
+                        },
+                      ),
+                      InputField(controller: _websiteController,
+                        label: labels.siteAddress,
+                        icon: Icons.cloud,
+                        iconColor: Colors.pink,
+                        validatorMessage: labels.siteAddressRequired,),
+                      InputField(controller: _usernameController,
+                          label: labels.username,
+                          icon: Icons.person,
+                          iconColor: Colors.pink,
+                          validatorMessage: labels.usernameRequired),
+                      InputField(controller: _passwordController,
+                          label: labels.password,
+                          icon: Icons.lock,
+                          iconColor: Colors.pink,
+                          validatorMessage: labels.passwordRequired),
+                    ],
                 ),
-                color: Colors.white,
-                elevation: 0,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                        labels.credential,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        )
-                    ),
-                    InputDropdown(
-                      initialValue: _categoryID,
-                      validatorMessage: labels.categoriesRequired,
-                      label: labels.categories,
-                      onChanged: (value) {
-                        _categoryID = value;
-                      },
-                    ),
-                    InputField(controller: _websiteController,
-                      label: labels.siteAddress,
-                      icon: Icons.cloud,
-                      iconColor: Colors.pink,
-                      validatorMessage: labels.siteAddressRequired,),
-                    InputField(controller: _usernameController,
-                        label: labels.username,
-                        icon: Icons.person,
-                        iconColor: Colors.pink,
-                        validatorMessage: labels.usernameRequired),
-                    InputField(controller: _passwordController,
-                        label: labels.password,
-                        icon: Icons.lock,
-                        iconColor: Colors.pink,
-                        validatorMessage: labels.passwordRequired),
-                  ],
+                  ),)
+              ]))
               ),
-                ),)
-            ]))
-            ),
-            SliverToBoxAdapter(child: TagsWidget(onAddTag: (String value){
-              setState(() {
-                _tags = [..._tags, value];
-              });
-              Navigator.pop(context);
-            }, onRemoveTag: (String value){
-              setState(() {
-                _tags = _tags.where((element) => element != value).toList();
-              });
-              Navigator.pop(context);
-            },tags: _tags),),
-            SliverToBoxAdapter(child: isCreate ? _createButton(context, _formKey,labels) : _updateButton(context,  _formKey,labels),)
-          ],
+              SliverToBoxAdapter(child: TagsWidget(onAddTag: (String value){
+                setState(() {
+                  _tags = [..._tags, value];
+                });
+                Navigator.pop(context);
+              }, onRemoveTag: (String value){
+                setState(() {
+                  _tags = _tags.where((element) => element != value).toList();
+                });
+                Navigator.pop(context);
+              },tags: _tags),),
+              SliverToBoxAdapter(child: isCreate ? _createButton(context, _formKey,labels) : _updateButton(context,  _formKey,labels),)
+            ],
+          ),
         ),
       ),
     );
