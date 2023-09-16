@@ -23,7 +23,7 @@
   "pleaseEnterEmail": "Por favor, introduce tu email",
   "pleaseEnterPassword": "Por favor, introduce tu contraseña",
   "login": "Iniciar sesión",
-  "signInWith": "Iniciar sesión con {provider}",
+  "signInWith": "Iniciar sesión con",
   "empty": "Vacío",
   "noData": "No hay datos",
   "logout": "Cerrar sesión",

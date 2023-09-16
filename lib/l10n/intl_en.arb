@@ -23,12 +23,7 @@
   "pleaseEnterEmail": "Please enter your email",
   "pleaseEnterPassword": "Please enter your password",
   "login": "Login",
-  "signInWith": "Sign in with {provider}",
-  "@signInWith": {
-    "placeholder": {
-      "provider": "Provider"
-    }
-  },
+  "signInWith": "Sign in with",
   "empty": "Empty",
   "noData": "No data",
   "logout": "Logout",

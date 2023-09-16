@@ -290,13 +290,13 @@ class S {
     );
   }
 
-  /// `Sign in with {provider}`
-  String signInWith(Object provider) {
+  /// `Sign in with`
+  String get signInWith {
     return Intl.message(
-      'Sign in with $provider',
+      'Sign in with',
       name: 'signInWith',
       desc: '',
-      args: [provider],
+      args: [],
     );
   }
 

@@ -83,7 +83,7 @@ class LoginPage extends StatelessWidget {
                         children: [
                           ...options.map((e) => CupertinoListTile(
                               onTap: e.onPressed,
-                              title:Text(labels.signInWith(e.name)),
+                              title:Text("${labels.signInWith} ${e.name}"),
                               leading: Image.asset(e.icon, height: 20,),
                           )).toList(),
                         ],

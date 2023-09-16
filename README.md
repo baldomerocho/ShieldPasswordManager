@@ -7,7 +7,12 @@ fvm flutter pub get
 fvm flutter <command>
 ```
 
-## Generate
+## Generate code
 ```
 fvm flutter pub run build_runner build -d
+```
+
+## Generate localization
+```
+flutter gen-l10n
 ```
