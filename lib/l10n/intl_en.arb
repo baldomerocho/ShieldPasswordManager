@@ -58,5 +58,7 @@
   "deleteTag": "Delete Tag",
   "tag": "Tag",
   "deleteTagMessage": "Are you sure you want to delete this tag?",
-  "language": "Language"
+  "language": "Language",
+  "passwordVulnerable": "Passwords Vulnerable",
+  "passwordVulnerableMessage": "This password is vulnerable, please change it as soon as possible!"
 }

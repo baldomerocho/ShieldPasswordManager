@@ -50,6 +50,7 @@ class DefaultFirebaseOptions {
     projectId: 'shieldpass-b7700',
     authDomain: 'shieldpass-b7700.firebaseapp.com',
     storageBucket: 'shieldpass-b7700.appspot.com',
+    measurementId: 'G-CF6PSWV13R',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -67,7 +68,7 @@ class DefaultFirebaseOptions {
     projectId: 'shieldpass-b7700',
     storageBucket: 'shieldpass-b7700.appspot.com',
     androidClientId: '137900084172-5qnk1f2sb9p4uoq54nbujeib9b0d4nh4.apps.googleusercontent.com',
-    iosClientId: '137900084172-ea43ls8gbl7348l8ua2t9jp1blfen38q.apps.googleusercontent.com',
+    iosClientId: '137900084172-4lh2hh75vvqkt65a21a2rvidjrg59p9d.apps.googleusercontent.com',
     iosBundleId: 'cho.baldomero.ptf',
   );
 

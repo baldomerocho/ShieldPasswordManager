@@ -247,6 +247,7 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
             orElse: () {},
             success: (updated) async {
               Navigator.of(context).pop();
+              context.read<CountPassVulnerableBloc>().add(CountPassVulnerableEvent.count());
               setState(() {
                 passEditing = updated.pass;
                 isCreate = false;
@@ -283,7 +284,7 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
               width: MediaQuery.of(context).size.width * 0.9,
               child: CupertinoButton(
                 color: CupertinoColors.systemPink,
-                onPressed: () {
+                onPressed: () async {
                   PasswordModel password = PasswordModel(
                     website: _websiteController.text,
                     username: _usernameController.text,
@@ -293,13 +294,14 @@ class _PasswordEditorState extends State<PasswordEditor> with SingleTickerProvid
                     updatedAt: DateTime.now(),
                     favorite: passEditing.favorite,
                     latestViewed: DateTime.now(),
-                    safe: passEditing.safe,
+                    safe: true,
                     tags: _tags
                   );
                   if (formKey.currentState!.validate() &&
                       password.categoryId.isNotEmpty) {
                     context.read<UpdatePassBloc>()
                         .add(UpdatePassEvent.send(password: password, id: passEditing.id));
+
                   }
                 },
                 child: Text(labels.update),

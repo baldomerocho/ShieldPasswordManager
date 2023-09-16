@@ -128,7 +128,6 @@ class Firestore{
   }
 
   Stream<List<PasswordEntity>> watchPasswords({required String query}) {
-
     if(query.isEmpty) {
       return database
           .collection('passwords')
@@ -163,5 +162,27 @@ class Firestore{
     });
   }
 
+  Stream<List<PasswordEntity>> watchPasswordsVulnerable() {
+    return database
+        .collection('passwords')
+        .where('safe', isEqualTo: false)
+        .snapshots()
+        .map((QuerySnapshot<Map<String, dynamic>> snapshot) {
+      return snapshot.docs.map((doc) {
+        final data = doc.data();
+        data['id'] = doc.id;
+        return PasswordEntity.fromJson(data);
+      }).toList();
+    });
+  }
+
+  Future<void> setPassVulnerable({required String id, required bool value}) async {
+    await database.collection("passwords").doc(id).update({"safe":value});
+  }
+
+  Future<int> countPassVulnerable() async {
+    final response = await database.collection("passwords").where("safe", isEqualTo: false).get();
+    return response.docs.length;
+  }
 
 }

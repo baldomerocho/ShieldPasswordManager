@@ -599,6 +599,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Passwords Vulnerable`
+  String get passwordVulnerable {
+    return Intl.message(
+      'Passwords Vulnerable',
+      name: 'passwordVulnerable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This password is vulnerable, please change it as soon as possible!`
+  String get passwordVulnerableMessage {
+    return Intl.message(
+      'This password is vulnerable, please change it as soon as possible!',
+      name: 'passwordVulnerableMessage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

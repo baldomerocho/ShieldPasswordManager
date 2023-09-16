@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -25,11 +26,29 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
   final Firestore database = Firestore(firestore);
   final FirebaseAuthentication firebaseAuthentication = FirebaseAuthentication();
   final DataRepository dataRepository = DataRepositoryImpl(database: database);
   // repositories
   final AuthenticationRepository authenticationRepository = AuthenticationRepositoryImpl(firebaseAuthentication);
+
+
+
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    announcement: true,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+
+
+  print('User granted permission: ${settings.authorizationStatus}');
+  messaging.getToken().then((value) => print(value));
+
   runApp(MyApp(authenticationRepository: authenticationRepository, dataRepository: dataRepository));
 }
 
@@ -50,14 +69,17 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => UpdatePassBloc(repository: dataRepository)),
         BlocProvider(create: (_) => DeletePassBloc(repository: dataRepository)),
         BlocProvider(create: (_) => SetPassFavouriteBloc(repository: dataRepository)),
+        BlocProvider(create: (_) => SetPassVulnerableBloc(repository: dataRepository)),
         BlocProvider(create: (_) => SetViewedBloc(repository: dataRepository)),
         BlocProvider(create: (_) => TakeLastViewsBloc(repository: dataRepository)),
         BlocProvider(create: (_) => TakeLastCreatedBloc(repository: dataRepository)),
         BlocProvider(create: (_) => TakeLatestUpdatedBloc(repository: dataRepository)),
         BlocProvider(create: (_) => WatchPasswordsBloc(repository: dataRepository)),
+        BlocProvider(create: (_) => WatchPassVulnerableBloc(repository: dataRepository)),
         BlocProvider(create: (_) => WatchCategoriesBloc(repository: dataRepository)),
         BlocProvider(create: (_) => WatchCategoriesSliderBloc(repository: dataRepository)),
         BlocProvider(create: (_) => WatchPassFavouritesBloc(repository: dataRepository)),
+        BlocProvider(create: (_) => CountPassVulnerableBloc(repository: dataRepository)),
         BlocProvider(create: (_) => LanguageBloc()),
       ],
       child: BlocBuilder<LanguageBloc, LanguageState>(

@@ -72,6 +72,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordRequired":
             MessageLookupByLibrary.simpleMessage("Password is required"),
+        "passwordVulnerable":
+            MessageLookupByLibrary.simpleMessage("Passwords Vulnerable"),
+        "passwordVulnerableMessage": MessageLookupByLibrary.simpleMessage(
+            "This password is vulnerable, please change it as soon as possible!"),
         "passwords": MessageLookupByLibrary.simpleMessage("Passwords"),
         "pleaseEnterEmail":
             MessageLookupByLibrary.simpleMessage("Please enter your email"),

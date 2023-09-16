@@ -53,5 +53,7 @@
   "deleteTag": "Eliminar etiqueta",
   "tag": "Etiqueta",
   "deleteTagMessage": "¿Estás seguro de que quieres eliminar esta etiqueta?",
-  "language": "Idioma"
+  "language": "Idioma",
+  "passwordVulnerable": "Contraseñas vulnerables",
+  "passwordVulnerableMessage": "Estas contraseñas son vulnerables, por favor, cámbialas."
 }

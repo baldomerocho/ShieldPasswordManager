@@ -1,20 +1,21 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:ptf/presentation/blocs/app/language/language.dart';
 import 'package:ptf/presentation/blocs/blocs.dart';
 
-class InternationalDropdown extends StatelessWidget {
-  const InternationalDropdown({Key? key}) : super(key: key);
+class InternationalButton extends StatelessWidget {
+  const InternationalButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: ElevatedButton(onPressed: (){
+      child: IconButton(onPressed: (){
         showLanguageBottomSheet(context);
-      }, child: Text(labels.language)),
+      }, icon: Icon(Icons.translate),),
     );
   }
 
